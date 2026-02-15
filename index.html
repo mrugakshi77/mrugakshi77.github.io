@@ -1147,36 +1147,45 @@
         // Contact form submission
 
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('.submit-btn');
-            const msgDiv = document.getElementById('formMessage');
-            btn.disabled = true;
-            btn.textContent = 'Sending...';
+            // e.preventDefault();
+            // const btn = e.target.querySelector('.submit-btn');
+            // const msgDiv = document.getElementById('formMessage');
+            // btn.disabled = true;
+            // btn.textContent = 'Sending...';
 
-            try {
-                emailjs.init("gKGXd08RqVD1zWPC7");
+            // try {
+            //     emailjs.init("gKGXd08RqVD1zWPC7");
                 
-                const response = await emailjs.send('service_40vdqqd', 'template_n4c5t1d', {
-                    to_email: 'mrugakshi77@gmail.com',
-                    from_name: document.getElementById('name').value,
-                    from_email: document.getElementById('email').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value
-                });
+            //     const response = await emailjs.send('service_40vdqqd', 'template_n4c5t1d', {
+            //         to_email: 'mrugakshi77@gmail.com',
+            //         from_name: document.getElementById('name').value,
+            //         from_email: document.getElementById('email').value,
+            //         subject: document.getElementById('subject').value,
+            //         message: document.getElementById('message').value
+            //     });
 
-                if (response.status === 200) {
-                    msgDiv.className = 'form-message success';
-                    msgDiv.textContent = '✓ Email sent successfully! I\'ll get back to you soon.';
-                    e.target.reset();
-                    btn.textContent = 'Send Message';
-                    btn.disabled = false;
-                }
-            } catch (error) {
-                msgDiv.className = 'form-message error';
-                msgDiv.textContent = '✗ Error sending email. Please try again.';
-                btn.textContent = 'Send Message';
-                btn.disabled = false;
-            }
+            //     if (response.status === 200) {
+            //         msgDiv.className = 'form-message success';
+            //         msgDiv.textContent = '✓ Email sent successfully! I\'ll get back to you soon.';
+            //         e.target.reset();
+            //         btn.textContent = 'Send Message';
+            //         btn.disabled = false;
+            //     }
+            // } catch (error) {
+            //     msgDiv.className = 'form-message error';
+            //     msgDiv.textContent = '✗ Error sending email. Please try again.';
+            //     btn.textContent = 'Send Message';
+            //     btn.disabled = false;
+            // }
+
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const mailto = `mailto:mrugakshi77@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+            window.location.href = mailto;
         });
     </script>
 </body>
