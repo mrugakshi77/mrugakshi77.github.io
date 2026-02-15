@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mrugakshi Chidrawar - Portfolio</title>
+    <title>Mrugakshi Chidrawar - Bioinformatics Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="portfolio-data-original.js"></script>
     <style>
         * {
             margin: 0;
@@ -17,46 +19,50 @@
         }
 
         :root {
-            --bg-dark: #0f1419;
-            --bg-secondary: #1a1f29;
-            --bg-tertiary: #232830;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --orange: #d4803c;
-            --gold: #d4a860;
-            --green: #6ba547;
-            --red: #c94444;
-            --border: #3a424e;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f0f2f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #ea580c;
+            --accent-light: #f97316;
+            --accent-hover: #c2410c;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --error: #ef4444;
         }
 
         html {
-            background: var(--bg-tertiary);
+            background: var(--bg-primary);
         }
 
         body {
-            font-family: 'Titillium Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            min-height: 100vh;
         }
 
         #app {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header */
         .header {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border-bottom: 1px solid var(--border);
-            padding: 20px 40px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .header-left {
@@ -66,39 +72,139 @@
         }
 
         .header-title {
-            font-size: 1.6em;
+            font-size: 1.3em;
             font-weight: 700;
             color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .header-subtitle {
             color: var(--text-secondary);
-            font-size: 0.95em;
+            font-size: 0.85em;
+            font-weight: 400;
         }
 
         .header-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .header-buttons a {
-            padding: 8px 16px;
+            padding: 8px 14px;
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-primary);
-            border-radius: 3px;
+            border-radius: 6px;
             font-size: 0.8em;
-            font-weight: 600;
+            font-weight: 500;
             text-transform: uppercase;
             transition: all 0.2s ease;
-            font-family: 'Titillium Web', sans-serif;
+            font-family: 'Inter', sans-serif;
             text-decoration: none;
-            display: inline-block;
+            letter-spacing: 0.3px;
         }
 
         .header-buttons a:hover {
-            border-color: var(--orange);
-            color: var(--orange);
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(234, 88, 12, 0.04);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            padding: 100px 40px;
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.02) 0%, rgba(249, 115, 22, 0.02) 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 3.2em;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .hero-photo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-photo img {
+    width: 320px;
+    height: 320px;
+    border-radius: 16px;
+    border: 2px solid #ea580c;
+    box-shadow: 0 10px 30px rgba(234, 88, 12, 0.12);
+    object-fit: cover;
+    background: white;
+    display: block;
+    position: relative;
+    z-index: 5;
+}
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .cta-btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: none;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-btn.primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .cta-btn.primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .cta-btn.secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(234, 88, 12, 0.04);
         }
 
         /* Contact Info */
@@ -109,7 +215,7 @@
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
-            font-size: 0.9em;
+            font-size: 0.85em;
             justify-content: center;
         }
 
@@ -121,19 +227,19 @@
         }
 
         .contact-item a {
-            color: var(--orange);
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             transition: color 0.2s ease;
         }
 
         .contact-item a:hover {
-            color: var(--gold);
+            color: var(--accent-hover);
         }
 
         /* Navigation */
         .nav-tabs {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border-bottom: 1px solid var(--border);
             padding: 0 40px;
             display: flex;
@@ -143,44 +249,102 @@
         }
 
         .nav-tabs button {
-            padding: 15px 20px;
+            padding: 14px 20px;
             background: transparent;
             border: none;
-            border-bottom: 3px solid transparent;
+            border-bottom: 2px solid transparent;
             color: var(--text-secondary);
             cursor: pointer;
-            font-family: 'Titillium Web', sans-serif;
-            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
             text-transform: uppercase;
-            font-size: 0.85em;
+            font-size: 0.75em;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
         }
 
         .nav-tabs button:hover {
-            color: var(--orange);
-            border-bottom-color: var(--orange);
+            color: var(--accent);
+            border-bottom-color: var(--accent);
         }
 
         .nav-tabs button.active {
-            color: var(--orange);
-            border-bottom-color: var(--orange);
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* Clean Bioinformatics Grid Pattern */
+        .main-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                /* DNA Helixes on sides */
+                linear-gradient(135deg, transparent 48%, rgba(234, 88, 12, 0.08) 48%, rgba(234, 88, 12, 0.08) 52%, transparent 52%),
+                linear-gradient(45deg, transparent 48%, rgba(234, 88, 12, 0.08) 48%, rgba(234, 88, 12, 0.08) 52%, transparent 52%),
+                /* Subtle grid */
+                linear-gradient(0deg, transparent 24%, rgba(234, 88, 12, 0.03) 25%, rgba(234, 88, 12, 0.03) 26%, transparent 27%, transparent 74%, rgba(234, 88, 12, 0.03) 75%, rgba(234, 88, 12, 0.03) 76%, transparent 77%, transparent 100%),
+                linear-gradient(90deg, transparent 24%, rgba(234, 88, 12, 0.03) 25%, rgba(234, 88, 12, 0.03) 26%, transparent 27%, transparent 74%, rgba(234, 88, 12, 0.03) 75%, rgba(234, 88, 12, 0.03) 76%, transparent 77%, transparent 100%);
+            background-size: 
+                40px 40px,
+                40px 40px,
+                40px 40px,
+                40px 40px;
+            background-position: 
+                0 0,
+                0 0,
+                0 0,
+                0 0;
+            background-attachment: fixed;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Decorative elements - DNA nodes */
+        .main-content::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle, rgba(234, 88, 12, 0.15) 1px, transparent 1px),
+                radial-gradient(circle, rgba(234, 88, 12, 0.1) 1.5px, transparent 1.5px),
+                radial-gradient(circle, rgba(234, 88, 12, 0.12) 2px, transparent 2px);
+            background-size: 
+                80px 80px,
+                120px 120px,
+                200px 200px;
+            background-position: 
+                0 0,
+                40px 40px,
+                100px 100px;
+            background-attachment: fixed;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 40px;
-            overflow-y: auto;
+            padding: 80px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: var(--bg-primary);
+            position: relative;
         }
 
         .section {
             width: 100%;
             max-width: 1400px;
             display: none;
+            position: relative;
+            z-index: 1;
         }
 
         .section.active {
@@ -188,116 +352,103 @@
         }
 
         .section-title {
-            font-size: 1.3em;
+            font-size: 2em;
             font-weight: 700;
-            color: var(--orange);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--text-primary);
+            margin-bottom: 50px;
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
         /* Card Grid */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
             margin-bottom: 40px;
             width: 100%;
         }
 
         /* Card */
         .card {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
             position: relative;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--orange);
-        }
-
-        .card.exotic::before {
-            background: var(--gold);
-        }
-
-        .card.legendary::before {
-            background: var(--red);
-        }
-
         .card:hover {
-            border-color: var(--orange);
-            background: linear-gradient(135deg, rgba(212, 128, 60, 0.1) 0%, var(--bg-secondary) 100%);
+            border-color: var(--accent);
+            box-shadow: 0 12px 24px rgba(234, 88, 12, 0.12);
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(212, 128, 60, 0.15);
         }
 
-        .card.exotic:hover {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, rgba(212, 168, 96, 0.1) 0%, var(--bg-secondary) 100%);
-            box-shadow: 0 8px 24px rgba(212, 168, 96, 0.15);
+        /* Company Logo */
+        .card-company {
+            width: 100%;
+            height: 100px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+            padding: 16px;
         }
 
-        .card.legendary:hover {
-            border-color: var(--red);
-            background: linear-gradient(135deg, rgba(201, 68, 68, 0.1) 0%, var(--bg-secondary) 100%);
-            box-shadow: 0 8px 24px rgba(201, 68, 68, 0.15);
+        .card-company img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
         }
 
         /* Card Icon */
         .card-icon {
             width: 100%;
-            height: 120px;
-            background: var(--bg-tertiary);
+            height: 80px;
+            background: var(--bg-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
+            font-size: 2.5em;
             border-bottom: 1px solid var(--border);
         }
 
         /* Card Content */
         .card-content {
-            padding: 16px;
+            padding: 24px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card-title {
-            font-size: 0.95em;
+            font-size: 1.05em;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             line-height: 1.3;
+            letter-spacing: -0.3px;
         }
 
         .card-subtitle {
-            font-size: 0.75em;
+            font-size: 0.8em;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            letter-spacing: 0.4px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
         .card-description {
-            font-size: 0.8em;
+            font-size: 0.85em;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.6;
             flex: 1;
             margin-bottom: 12px;
         }
@@ -311,23 +462,15 @@
 
         .card-tag {
             display: inline-block;
-            padding: 3px 8px;
-            background: rgba(212, 128, 60, 0.15);
-            color: var(--orange);
-            border-radius: 2px;
+            padding: 4px 10px;
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border-radius: 6px;
             font-size: 0.7em;
             text-transform: uppercase;
             font-weight: 600;
-        }
-
-        .card.exotic .card-tag {
-            background: rgba(212, 168, 96, 0.15);
-            color: var(--gold);
-        }
-
-        .card.legendary .card-tag {
-            background: rgba(201, 68, 68, 0.15);
-            color: var(--red);
+            letter-spacing: 0.3px;
+            border: 1px solid var(--border);
         }
 
         /* Modal */
@@ -337,12 +480,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.4);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             padding: 20px;
+            backdrop-filter: blur(4px);
         }
 
         .modal-overlay.active {
@@ -351,20 +495,21 @@
         }
 
         .modal {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 12px;
             max-width: 800px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .modal-header {
-            background: var(--bg-tertiary);
+            background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
-            padding: 20px;
+            padding: 28px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -375,20 +520,18 @@
             flex: 1;
         }
 
-        .modal-header-icon {
-            font-size: 2.5em;
-            flex-shrink: 0;
-        }
-
         .modal-header-content h2 {
-            font-size: 1.6em;
+            font-size: 1.8em;
             color: var(--text-primary);
             margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .modal-header-content p {
             color: var(--text-secondary);
             font-size: 0.9em;
+            font-weight: 500;
         }
 
         .modal-close {
@@ -396,12 +539,12 @@
             border: 1px solid var(--border);
             color: var(--text-primary);
             cursor: pointer;
-            width: 30px;
-            height: 30px;
-            border-radius: 3px;
-            font-size: 1.4em;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            font-size: 1.5em;
             transition: all 0.2s ease;
-            font-family: 'Titillium Web', sans-serif;
+            font-family: 'Inter', sans-serif;
             padding: 0;
             line-height: 1;
             display: flex;
@@ -411,23 +554,24 @@
         }
 
         .modal-close:hover {
-            border-color: var(--orange);
-            color: var(--orange);
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--bg-secondary);
         }
 
         .modal-content {
-            padding: 30px;
+            padding: 32px;
         }
 
         .modal-section {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         .modal-section-title {
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 700;
-            color: var(--orange);
-            margin-bottom: 12px;
+            color: var(--accent);
+            margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -435,6 +579,7 @@
         .modal-section-content {
             color: var(--text-secondary);
             line-height: 1.8;
+            font-size: 0.95em;
         }
 
         .modal-section-content ul {
@@ -443,16 +588,17 @@
         }
 
         .modal-section-content li {
-            padding-left: 16px;
+            padding-left: 18px;
             margin-bottom: 10px;
             position: relative;
         }
 
         .modal-section-content li::before {
-            content: '◆';
+            content: '→';
             position: absolute;
             left: 0;
-            color: var(--orange);
+            color: var(--accent);
+            font-weight: 600;
         }
 
         .modal-tags {
@@ -463,23 +609,30 @@
 
         .modal-tag {
             padding: 6px 12px;
-            background: rgba(212, 128, 60, 0.2);
-            color: var(--orange);
-            border-radius: 3px;
-            font-size: 0.8em;
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border-radius: 8px;
+            font-size: 0.75em;
             text-transform: uppercase;
             font-weight: 600;
             border: 1px solid var(--border);
+            letter-spacing: 0.3px;
         }
 
         /* Contact Form */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: start;
+        }
+
         .contact-form {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 30px;
-            max-width: 600px;
-            margin: 0 auto;
+            border-radius: 12px;
+            padding: 32px;
             width: 100%;
         }
 
@@ -491,30 +644,35 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--orange);
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            text-transform: none;
+            font-size: 0.9em;
+            letter-spacing: 0;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            background: var(--bg-tertiary);
+            background: var(--bg-secondary);
             border: 1px solid var(--border);
             color: var(--text-primary);
-            border-radius: 3px;
-            font-family: 'Titillium Web', sans-serif;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
             font-size: 0.95em;
             transition: all 0.2s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-secondary);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--orange);
-            box-shadow: 0 0 0 3px rgba(212, 128, 60, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
         }
 
         .form-group textarea {
@@ -523,24 +681,25 @@
         }
 
         .submit-btn {
-            background: var(--orange);
-            color: var(--bg-dark);
+            background: var(--accent);
+            color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 3px;
-            font-family: 'Titillium Web', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: none;
             cursor: pointer;
             font-size: 0.9em;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             transition: all 0.2s ease;
             width: 100%;
         }
 
         .submit-btn:hover {
-            background: var(--gold);
-            transform: translateY(-2px);
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
         }
 
         .submit-btn:disabled {
@@ -552,33 +711,33 @@
         .form-message {
             margin-top: 15px;
             padding: 12px;
-            border-radius: 3px;
+            border-radius: 8px;
             text-align: center;
             font-weight: 600;
             display: none;
+            font-size: 0.9em;
         }
 
         .form-message.success {
-            background: rgba(107, 165, 71, 0.2);
-            color: var(--green);
-            border: 1px solid var(--green);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             display: block;
         }
 
         .form-message.error {
-            background: rgba(201, 68, 68, 0.2);
-            color: var(--red);
-            border: 1px solid var(--red);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.3);
             display: block;
         }
 
         /* Map */
         #map {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            margin: 20px 0;
+            border-radius: 12px;
         }
 
         /* Animations */
@@ -590,7 +749,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -599,13 +758,13 @@
         }
 
         .card {
-            animation: slideUp 0.3s ease-out backwards;
+            animation: slideUp 0.4s ease-out backwards;
         }
 
         .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 0.05s; }
-        .card:nth-child(3) { animation-delay: 0.1s; }
-        .card:nth-child(4) { animation-delay: 0.15s; }
+        .card:nth-child(2) { animation-delay: 0.08s; }
+        .card:nth-child(3) { animation-delay: 0.16s; }
+        .card:nth-child(4) { animation-delay: 0.24s; }
 
         /* Scrollbar */
         ::-webkit-scrollbar {
@@ -613,27 +772,45 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--orange);
+            background: var(--border);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--gold);
+            background: var(--accent);
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 80px 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.4em;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header {
-                padding: 15px 20px;
+                padding: 14px 20px;
             }
 
             .contact-bar {
                 padding: 10px 20px;
-                font-size: 0.85em;
+                font-size: 0.8em;
+                gap: 15px;
             }
 
             .nav-tabs {
@@ -641,16 +818,40 @@
                 overflow-x: auto;
             }
 
+            .nav-tabs button {
+                padding: 12px 16px;
+                font-size: 0.7em;
+            }
+
             .main-content {
-                padding: 20px;
+                padding: 60px 20px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2em;
+            }
+
+            .hero-photo img {
+                width: 240px;
+                height: 240px;
             }
 
             .card-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             #map {
                 height: 300px;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+                font-size: 1.5em;
             }
         }
     </style>
@@ -662,7 +863,7 @@
             <div class="header-left">
                 <div>
                     <div class="header-title">Mrugakshi Chidrawar</div>
-                    <div class="header-subtitle">Bioinformatics Software Engineer</div>
+                    <div class="header-subtitle">Bioinformatics Engineer</div>
                 </div>
             </div>
             <div class="header-buttons">
@@ -672,7 +873,7 @@
             </div>
         </div>
 
-        <!-- Contact Info -->
+        <!-- Contact Info Bar -->
         <div class="contact-bar">
             <div class="contact-item">📍 Santa Clara, CA</div>
             <div class="contact-item">
@@ -682,6 +883,22 @@
                 <a href="mailto:mrugakshi77@gmail.com">✉️ mrugakshi77@gmail.com</a>
             </div>
         </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bridging Computation & Biology</h1>
+                <p class="subtitle">Building tools that turn genomic data into biological insights</p>
+                <p>I'm a bioinformatics engineer with 3+ years building NGS pipelines, ML-powered variant prediction, and production research platforms. I thrive at the intersection of computational biology and wet lab science, translating complex genomic workflows into accessible tools that empower discovery.</p>
+                <div class="cta-buttons">
+                    <a href="#experience" class="cta-btn primary" onclick="scrollToExperience(); return false;">View My Work</a>
+                    <a href="#contact" class="cta-btn secondary" onclick="scrollToContact(); return false;">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <img src="mrugakshi_photo.jfif" alt="Mrugakshi Chidrawar">
+            </div>
+        </section>
 
         <!-- Navigation -->
         <div class="nav-tabs">
@@ -696,53 +913,55 @@
         <div class="main-content">
             <!-- Experience Section -->
             <section id="experience" class="section active">
-                <h2 class="section-title">💼 Experience</h2>
+                <h2 class="section-title">Experience</h2>
                 <div class="card-grid" id="experienceGrid"></div>
             </section>
 
             <!-- Projects Section -->
             <section id="projects" class="section">
-                <h2 class="section-title">🔬 Projects</h2>
+                <h2 class="section-title">Projects</h2>
                 <div class="card-grid" id="projectsGrid"></div>
             </section>
 
             <!-- Skills Section -->
             <section id="skills" class="section">
-                <h2 class="section-title">⚙️ Skills</h2>
+                <h2 class="section-title">Skills</h2>
                 <div class="card-grid" id="skillsGrid"></div>
             </section>
 
             <!-- Education Section -->
             <section id="education" class="section">
-                <h2 class="section-title">🎓 Education</h2>
+                <h2 class="section-title">Education</h2>
                 <div class="card-grid" id="educationGrid"></div>
             </section>
 
             <!-- Contact Section -->
             <section id="contact" class="section">
-                <h2 class="section-title">📬 Contact Me</h2>
-                <div id="map"></div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                        <div id="formMessage"></div>
-                    </form>
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-section">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Message subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" placeholder="Your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                            <div id="formMessage"></div>
+                        </form>
+                    </div>
+                    <div id="map"></div>
                 </div>
             </section>
         </div>
@@ -752,12 +971,9 @@
     <div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay') closeModal()">
         <div class="modal">
             <div class="modal-header">
-                <div>
-                    <span class="modal-header-icon" id="modalIcon"></span>
-                    <div class="modal-header-content">
-                        <h2 id="modalTitle"></h2>
-                        <p id="modalSubtitle"></p>
-                    </div>
+                <div class="modal-header-content">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalSubtitle"></p>
                 </div>
                 <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
@@ -766,102 +982,10 @@
     </div>
 
     <script>
-        const data = {
-            experience: [
-                {
-                    id: 1, icon: '🧬', title: 'Bioinformatician', company: 'Gladstone Institutes',
-                    dates: 'Jan 2023 – Jan 2026', tags: ['NGS', 'Python', 'HPC', 'Deep Learning'],
-                    highlights: ['Developed VEP Platform analyzing 22M+ noncoding variants', 'Built snMultiome pipeline for Alzheimer\'s/Parkinson\'s research', 'Performed CRISPR HDR edit site selection', 'Developed ATAC-seq Snakemake pipeline']
-                },
-                {
-                    id: 2, icon: '💊', title: 'Bioinformatics Intern', company: 'Pfizer',
-                    dates: 'May 2022 – Dec 2022', tags: ['GWAS', 'R', 'Fine-mapping', 'QTL'],
-                    highlights: ['Identified genetic signals at HAL locus', 'Found 16 colocalized protein-metabolite QTL pairs', 'Benchmarked fine-mapping algorithms']
-                },
-                {
-                    id: 3, icon: '🔬', title: 'Research Assistant', company: 'Boston University - UC Berkeley',
-                    dates: 'Jan 2022 – May 2022', tags: ['Python', 'SQL', 'CarveMe', 'Web Dev'],
-                    highlights: ['Developed CarveMe pipeline', 'Built web-based UI with SQL database', 'Automated workflows for wet lab scientists']
-                },
-                {
-                    id: 4, icon: '⚡', title: 'Software Developer', company: 'Energy Exemplar',
-                    dates: 'Nov 2020 – Jul 2021', tags: ['Vue.js', 'Django', 'BI', 'Cloud'],
-                    highlights: ['Full-stack development with Vue.js and Django', 'Enhanced cloud-based BI reporting', 'Data visualization and product design']
-                }
-            ],
-            projects: [
-                {
-                    id: 1, icon: '🎯', title: 'Cancer Classification', date: 'Jan 2026',
-                    shortDesc: 'ML classifier on TCGA RNA-seq data', tags: ['ML', 'Python', 'RNA-seq'],
-                    description: 'Developed ML classifier achieving 99.38% accuracy on TCGA bulk RNA-seq data.',
-                    details: ['Feature selection: 20,531 → 1,000 genes', 'Logistic Regression & Random Forest', 'Class balancing', 'Cross-validation']
-                },
-                {
-                    id: 2, icon: '🧠', title: 'CHOIR scRNA-seq', date: 'Jul 2025',
-                    shortDesc: 'Single-cell reanalysis of mouse hypothalamus', tags: ['scRNA-seq', 'R', 'CHOIR'],
-                    description: 'Reprocessed Chen et al. scRNA-seq dataset with CHOIR.',
-                    details: ['Refined clustering from 45 to 47 clusters', 'Identified OPC subtypes', 'GO enrichment analysis', 'Marker gene characterization']
-                },
-                {
-                    id: 3, icon: '🍞', title: 'Yeast Stress Response', date: 'Jun 2025',
-                    shortDesc: 'SMART-seq analysis pipeline', tags: ['scRNA-seq', 'Python', 'Yeast'],
-                    description: 'Comprehensive scRNA-seq analysis pipeline for stress characterization.',
-                    details: ['Built SMART-seq pipeline', 'Cell-level expression profiling', 'Gene module scoring', 'Gasch et al. reproduction']
-                },
-                {
-                    id: 4, icon: '🧬', title: 'VEP Platform', date: 'Ongoing',
-                    shortDesc: 'Web tool for noncoding variant analysis', tags: ['Web Dev', 'Vue.js', 'Deep Learning'],
-                    description: 'Public-facing web platform for variant effect prediction.',
-                    details: ['Analyzes 22M+ noncoding variants', 'ChromBPNet deep learning', 'HDF5 backend', 'Interactive visualizations']
-                }
-            ],
-            skills: [
-                {
-                    id: 1, icon: '🔬', name: 'Bioinformatics', shortList: 'NGS, GWAS, scRNA-seq...',
-                    tags: ['NGS', 'GWAS', 'RNA-seq', 'ATAC-seq', 'scRNA-seq'],
-                    skills: ['RNA-seq analysis', 'GWAS', 'Single-cell RNA-seq', 'Variant prediction', 'CRISPR design', 'Statistical genomics', 'Machine learning', 'Snakemake pipelines']
-                },
-                {
-                    id: 2, icon: '⚙️', name: 'Programming', shortList: 'Python, R, SQL...',
-                    tags: ['Python', 'R', 'SQL', 'Docker', 'Git'],
-                    skills: ['Python data processing', 'R statistical analysis', 'SQL databases', 'Docker containers', 'Git version control', 'Flask web dev', 'Vue.js frontend', 'Linux/HPC']
-                },
-                {
-                    id: 3, icon: '☁️', name: 'Infrastructure', shortList: 'HPC, Cloud, Linux...',
-                    tags: ['HPC', 'Cloud', 'Linux', 'Conda', 'DBMS'],
-                    skills: ['HPC optimization', 'Cloud computing', 'Conda environments', 'Linux admin', 'Database design', 'Production deployment', 'Data visualization', 'Web development']
-                }
-            ],
-            education: [
-                {
-                    id: 1, icon: '🎓', title: 'M.S. Bioinformatics', school: 'Boston University',
-                    period: 'Sep 2021 – Jan 2023', gpa: '4.0/4.0', tags: ['Bioinformatics']
-                },
-                {
-                    id: 2, icon: '🎓', title: 'B.E. Computer Engineering', school: 'Pune Institute of Computer Technology',
-                    period: 'Aug 2016 – Aug 2020', gpa: '9.26/10', tags: ['Engineering']
-                }
-            ]
-        };
-
-        function renderCards(type, cardClass = '') {
-            const items = data[type];
-            const grid = document.getElementById(type + 'Grid');
-            grid.innerHTML = items.map(item => `
-                <div class="card ${cardClass}" onclick="openModal('${type}', ${item.id})">
-                    <div class="card-icon">${item.icon}</div>
-                    <div class="card-content">
-                        <div class="card-title">${item.title || item.name}</div>
-                        <div class="card-subtitle">${item.company || item.school || ''}</div>
-                        <div class="card-description">${item.dates || item.period || item.shortDesc || ''}</div>
-                        <div class="card-tags">
-                            ${(item.tags || []).slice(0, 2).map(tag => `<span class="card-tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
+        // Use external portfolio data
+        let data = {};
+        
+        // Define all functions FIRST so HTML onclick handlers can find them
         function switchTab(tab) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(tab).classList.add('active');
@@ -874,11 +998,20 @@
             }
         }
 
+        function scrollToExperience() {
+            document.getElementById('experience').scrollIntoView({ behavior: 'smooth' });
+            switchTab('experience');
+        }
+
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            switchTab('contact');
+        }
+
         function openModal(type, id) {
             const item = data[type].find(i => i.id === id);
             if (!item) return;
 
-            document.getElementById('modalIcon').textContent = item.icon;
             document.getElementById('modalTitle').textContent = item.title || item.name;
             document.getElementById('modalSubtitle').textContent = item.company || item.school || item.date || '';
 
@@ -886,7 +1019,7 @@
             if (type === 'experience') {
                 content = `
                     <div class="modal-section">
-                        <div class="modal-section-title">Highlights</div>
+                        <div class="modal-section-title">Key Highlights</div>
                         <div class="modal-section-content">
                             <ul>${item.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
                         </div>
@@ -912,11 +1045,17 @@
                         <div class="modal-section-title">Technologies</div>
                         <div class="modal-tags">${item.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}</div>
                     </div>
+                    ${item.github ? `<div class="modal-section">
+                        <div class="modal-section-title">Repository</div>
+                        <div class="modal-section-content">
+                            <a href="${item.github}" target="_blank" style="color: #ea580c; text-decoration: none; font-weight: 600;">→ View on GitHub</a>
+                        </div>
+                    </div>` : ''}
                 `;
             } else if (type === 'skills') {
                 content = `
                     <div class="modal-section">
-                        <div class="modal-section-title">Skills</div>
+                        <div class="modal-section-title">Core Skills</div>
                         <div class="modal-section-content">
                             <ul>${item.skills.map(s => `<li>${s}</li>`).join('')}</ul>
                         </div>
@@ -929,6 +1068,7 @@
                         <div class="modal-section-content">
                             <p><strong>GPA:</strong> ${item.gpa}</p>
                             <p><strong>Period:</strong> ${item.period}</p>
+                            <p style="margin-top: 16px;">${item.details}</p>
                         </div>
                     </div>
                 `;
@@ -947,53 +1087,96 @@
             if (mapInitialized) return;
             mapInitialized = true;
             
-            const map = L.map('map').setView([37.3382, -121.8863], 13);
+            const map = L.map('map').setView([37.3541, -121.9552], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
-            L.marker([37.3382, -121.8863]).addTo(map).bindPopup('<b>Santa Clara, CA</b>');
+            
+            // Add a general circle to show area instead of exact location
+            const circle = L.circle([37.3541, -121.9552], {
+                color: '#ea580c',
+                fillColor: '#ea580c',
+                fillOpacity: 0.1,
+                weight: 2,
+                radius: 2000 // 2km radius circle
+            }).addTo(map);
+            
+            circle.bindPopup('<b>Santa Clara Area</b><br/>📍 Based in this region').openPopup();
         }
+        
+        // Wait for portfolioData to load, then initialize
+        function initPortfolio() {
+            if (typeof portfolioData !== 'undefined') {
+                data = portfolioData;
+                renderCards('experience', true);
+                renderCards('projects', false);
+                renderCards('skills', false);
+                renderCards('education', true);
+            } else {
+                console.error('ERROR: portfolio-data.js not loaded! Make sure portfolio-data.js is in the same folder as the HTML file.');
+                // Fallback to empty data
+                data = { experience: [], projects: [], skills: [], education: [] };
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPortfolio);
+        } else {
+            initPortfolio();
+        }
+
+        function renderCards(type, useCompanyLogo = false) {
+            const items = data[type];
+            const grid = document.getElementById(type + 'Grid');
+            grid.innerHTML = items.map(item => `
+                <div class="card" onclick="openModal('${type}', ${item.id})">
+                    ${useCompanyLogo && item.logo ? `<div class="card-company"><img src="${item.logo}" alt="${item.company}"></div>` : `<div class="card-icon">${item.icon}</div>`}
+                    <div class="card-content">
+                        <div class="card-title">${item.title || item.name}</div>
+                        <div class="card-subtitle">${item.company || item.school || ''}</div>
+                        <div class="card-description">${item.dates || item.period || item.shortDesc || ''}</div>
+                        <div class="card-tags">
+                            ${(item.tags || []).slice(0, 2).map(tag => `<span class="card-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Contact form submission
 
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('.submit-btn');
+            const msgDiv = document.getElementById('formMessage');
             btn.disabled = true;
             btn.textContent = 'Sending...';
 
             try {
-                const res = await fetch('https://formspree.io/f/mkdlvdqo', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        subject: document.getElementById('subject').value,
-                        message: document.getElementById('message').value
-                    })
+                emailjs.init("service_40vdqqd","template_n4c5t1d");
+                
+                const response = await emailjs.send('service_40vdqqd', 'template_n4c5t1d', {
+                    from_name: document.getElementById('name').value,
+                    from_email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
                 });
 
-                const msg = document.getElementById('formMessage');
-                if (res.ok) {
-                    msg.className = 'form-message success';
-                    msg.textContent = '✓ Message sent!';
+                if (response.status === 200) {
+                    msgDiv.className = 'form-message success';
+                    msgDiv.textContent = '✓ Email sent successfully! I\'ll get back to you soon.';
                     e.target.reset();
-                } else {
-                    msg.className = 'form-message error';
-                    msg.textContent = '✗ Error sending';
+                    btn.textContent = 'Send Message';
+                    btn.disabled = false;
                 }
-            } catch {
-                document.getElementById('formMessage').className = 'form-message error';
-                document.getElementById('formMessage').textContent = '✗ Error';
+            } catch (error) {
+                msgDiv.className = 'form-message error';
+                msgDiv.textContent = '✗ Error sending email. Please try again.';
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
             }
-            btn.disabled = false;
-            btn.textContent = 'Send Message';
         });
-
-        // Initialize
-        renderCards('experience', 'epic');
-        renderCards('projects', 'legendary');
-        renderCards('skills', 'exotic');
-        renderCards('education');
     </script>
 </body>
 </html>
