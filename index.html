@@ -1154,7 +1154,7 @@
             btn.textContent = 'Sending...';
 
             try {
-                emailjs.init("service_40vdqqd","template_n4c5t1d");
+                emailjs.init("service_40vdqqd");
                 
                 const response = await emailjs.send('service_40vdqqd', 'template_n4c5t1d', {
                     from_name: document.getElementById('name').value,
