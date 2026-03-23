@@ -1046,24 +1046,24 @@
 
         <!-- HERO -->
         <section id="hero" class="section">
-            <div class="hero-eyebrow">Available for new roles · Santa Clara, CA</div>
-            <h1 class="hero-headline">
-                SOFTWARE<br>
-                ENGINEER<br>
-                <span class="hl-accent">&amp; DATA SYSTEMS</span>
-                BUILDER
+            <div class="hero-eyebrow">I'm looking to join a team where I can build scalable software, data pipelines, and ML-driven systems that turn complex data into actionable insights · Santa Clara, CA</div>
+            <h1 class="hero-headline"> Bioinformatics Software Engineer | Scalable Pipelines & ML Interpretation | Web Apps + Multi-modal
+                Software Engineer<br>
+                <span class="hl-accent">&amp; Web Apps + Multi-modal Datasets</span>
+                Scalable Pipelines & ML Interpretation<br>
             </h1>
             <div class="hero-body">
                 <div>
                     <p class="hero-bio">
                         I build <strong>production-grade data pipelines</strong>, ML-backed web applications,
-                        and scalable backend systems. My engineering experience comes from working with some
-                        of the most demanding data that exists — <strong>millions of records, hundreds of features,
-                        multi-modal inputs</strong>, and downstream systems researchers depend on daily.
+                        and scalable backend systems. My engineering experience comes from working with some 
+                        of the most complex data in existence — <strong>high-dimensional</strong>strong> genomic datasets with <strong>millions of features, 
+                        terabyte-scale sequencing outputs, and multi-modal data</strong>strong> that demands both statistical rigor 
+                        and systems thinking to process reliably.
                     </p>
                     <p class="hero-bio" style="margin-top:12px;">
                         That background translates directly: <strong>batch correction → normalization at scale</strong>;
-                        variant prediction over 22M records → <strong>low-latency retrieval systems</strong>;
+                        variant prediction over 22M records → <strong>large-scale feature engineering and low-latency retrieval systems</strong>;
                         HPC pipeline optimization → <strong>distributed workflow orchestration</strong>.
                     </p>
                     <div class="hero-stats">
@@ -1072,7 +1072,7 @@
                             <div class="stat-label">Records served</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-value">58K</div>
+                            <div class="stat-value">3M+</div>
                             <div class="stat-label">Cells analyzed</div>
                         </div>
                         <div class="stat">
@@ -1227,10 +1227,25 @@ const PROJECTS = [
     ]
   },
   {
+    id: 'tcga',
+    title: 'TCGA Cancer Type Classifier',
+    badges: [],
+    desc: 'Deep learning multi-class classifier distinguishing cancer types from TCGA gene expression profiles with 99.38% test accuracy. Demonstrates high-dimensional ML classification on a biologically complex dataset with thousands of features.',
+    parallel: ['high-dimensional classification (1000s of features)', 'multi-class deep learning pipeline', 'rigorous train/val/test evaluation', 'feature selection at scale'],
+    tags: ['Python','PyTorch','scikit-learn','pandas','numpy','TCGA'],
+    link: null,
+    details: [
+      '99.38% test accuracy on multi-class cancer type classification from RNA-seq gene expression profiles',
+      'Input space spans thousands of gene features — requires principled feature selection and dimensionality management',
+      'Stratified train/val/test split ensures balanced class representation across cancer types',
+      'The core challenge — classification in very high-dimensional, noisy feature spaces — maps directly to any tabular ML problem at scale'
+    ]
+  },
+  {
     id: 'pipeline',
     title: 'Multi-Omics Processing Pipeline',
     badges: [],
-    desc: 'Production Snakemake pipeline integrating gene expression and chromatin accessibility data from paired single-cell sequencing experiments. Engineered for HPC with a 40% compute reduction through parallelization, Demuxlet-based sample deconvolution, automated QC checkpoints, and modular rule-based task orchestration.',
+    desc: 'Production Snakemake pipeline integrating gene expression and chromatin accessibility data from paired single-cell sequencing experiments representing ~3 million cells. Engineered for HPC with a 40% compute reduction through parallelization, Demuxlet-based sample deconvolution, automated QC checkpoints, and modular rule-based task orchestration.',
     parallel: ['multi-modal ETL pipeline design', 'HPC workflow orchestration (Snakemake)', '40% compute optimization via parallelization', 'automated QC + data quality gates', 'modular pipeline — steps add/remove without full reruns'],
     tags: ['Python','R','Snakemake','HPC','Slurm','Conda','Jupyter'],
     link: null,
@@ -1257,21 +1272,6 @@ const PROJECTS = [
       'QC visualization suite: read length distributions, cumulative sequencing depth curves, multi-panel summary figures',
       'Fully reproducible with pixi — locked dependency environment, portable across systems without manual setup'
     ]
-  },
-  {
-    id: 'tcga',
-    title: 'TCGA Cancer Type Classifier',
-    badges: [],
-    desc: 'Deep learning multi-class classifier distinguishing cancer types from TCGA gene expression profiles with 99.38% test accuracy. Demonstrates high-dimensional ML classification on a biologically complex dataset with thousands of features.',
-    parallel: ['high-dimensional classification (1000s of features)', 'multi-class deep learning pipeline', 'rigorous train/val/test evaluation', 'feature selection at scale'],
-    tags: ['Python','PyTorch','scikit-learn','pandas','numpy','TCGA'],
-    link: null,
-    details: [
-      '99.38% test accuracy on multi-class cancer type classification from RNA-seq gene expression profiles',
-      'Input space spans thousands of gene features — requires principled feature selection and dimensionality management',
-      'Stratified train/val/test split ensures balanced class representation across cancer types',
-      'The core challenge — classification in very high-dimensional, noisy feature spaces — maps directly to any tabular ML problem at scale'
-    ]
   }
 ];
 
@@ -1279,34 +1279,57 @@ const EXPERIENCE = [
   {
     title: 'Bioinformatics Software Engineer',
     company: 'Gladstone Institutes — Corces Lab',
-    period: '2022 – 2024',
+    period: 'Jan 2023 – Jan 2026',
     highlights: [
-      'Led full-stack overhaul of the Variant Effect Prediction Platform: HDF5 backend serving 22M+ records, batch querying API, DeepSHAP model interpretation, and downloadable result exports',
-      'Built production snMultiome pipeline integrating two data modalities per sample on HPC; engineered parallelization achieving 40% compute reduction with Demuxlet-based sample deconvolution',
-      'Performed scRNA-seq clustering reanalysis using CHOIR on mouse hypothalamus dataset, resolving two novel OPC subtypes across 45→47 clusters with GO enrichment validation',
-      'Maintained and extended shared research codebase (Python, R, Snakemake) used by multiple team members across concurrent projects'
+      'Built and deployed a full-stack genomic variant effect prediction platform serving 22M+ variants; designed RESTful Flask APIs for variant lookup, batch query processing, and on-demand file generation (SVG/PDF/CSV), with HDF5-backed retrieval and server-side session management for concurrent users',
+      'Architected a reusable high-throughput data processing pipeline (Snakemake) for multi-modal single-cell data, implementing tiered QC and filtering strategies; optimized HPC/SGE workflows reducing compute time by 40% across ~3 million cells',
+      'Built ETL pipeline integrating NGS datasets (RNA-seq, ATAC-seq) for cross-cohort analyses, managing raw FASTQ ingestion through QC, alignment, quantification, and downstream statistical analysis and reporting',
+      'Developed Python pipeline for computational variant selection using Jensen-Shannon divergence and ML model predictions, enabling automated prioritization of genomic edit candidates',
+      'Primary technical collaborator for 12–14 wet lab scientists; scoped and delivered ad-hoc analyses end-to-end; mentored an undergraduate intern for 8 months, guiding them through web app development and containerization'
     ],
-    tags: ['Python','R','Flask','Vue.js','HDF5','Snakemake','HPC','SHAP','Seurat']
+    tags: ['Python','R','Flask','Conda/Docker','HDF5','Snakemake','HPC','SHAP','Seurat']
   },
   {
-    title: 'Bioinformatics Intern',
+    title: 'Data Science & Bioinformatics Intern',
     company: 'Pfizer',
-    period: '2021',
+    period: 'May 2022 - Dec 2022',
     highlights: [
-      'Applied computational methods to biological data analysis in a pharmaceutical research context',
-      'Developed and validated analytical pipelines supporting research workflows with structured, high-dimensional biological datasets',
-      'Statistical modeling and feature engineering on multi-variable datasets with domain-specific constraints'
+      'Designed, trained, and evaluated an NLP classification model to automatically categorize quality-measurement taxonomies from audit reports, achieving ~78% accuracy',
+      'Built risk-analysis and resource-scheduling models to quantify audit-system risk and optimize audit planning',
+      'Built statistical fine-mapping workflows (SuSiE, Bayesian colocalization) to identify causal signals from GWAS summary statistics, uncovering two independent signals at the HAL locus',
+      'Developed integrative data pipeline to identify 16 colocalized protein-metabolite QTL pairs using LD-aware approaches; validated computational outputs against experimental datasets and domain expert review',
+      'Benchmarked statistical models (SuSiE vs SuSiE-inf) on metabolite datasets and documented parameter recommendations for reproducible summary-statistics-based workflows'  
     ],
-    tags: ['Python','R','Statistical Modeling','Pipeline Development']
+    tags: ['Python','R','Statistical Modeling','Pipeline Development', 'Data Science', 'Machine-Learning', 'NLP']
+  },
+  {
+    title: 'Research Assistant',
+    company: 'Boston University (Segre Lab) – UC Berkeley Collab',
+    period: 'Jan 2022 - May 2022',
+    highlights: [
+      'Built a python pipeline to explore genome-scale metabolic models using CarveMe on Linux/HPC environments for the m-CAFEs project, enabling accurate microbiome growth analysis across culture mediums',
+      'Designed and deployed a full-stack web application backed by a scalable SQL database to automate genome and media file management, streamlining data exploration workflows for wet lab researchers'
+    ],
+    tags: ['Python','R','Jupyter','SQL', 'Web-app']
+  },
+  {
+    title: 'Associate Software Developer',
+    company: 'Energy Exemplar – India Development Center',
+    period: 'Nov 2020 - Jul 2021',
+    highlights: [
+      'Developed interactive UI components and BI features for the cloud-based Plexos Cloud platform, improving analytics workflows and delivering client-facing data visualizations',
+      'Implemented and customized Sisense BI dashboards to deliver client-specific analytics and data visualization solutions'
+    ],
+    tags: ['Python','Vue.js','BI Dashboards','Azure', 'Databricks', 'HTML/CSS']
   }
 ];
 
 const SKILLS = [
   { group: 'Languages',           items: ['Python','R','SQL','JavaScript','HTML/CSS','Bash'] },
-  { group: 'Frameworks & APIs',   items: ['FastAPI','Flask','Vue.js','R Shiny','SQLAlchemy','Typer'] },
+  { group: 'Frameworks & APIs',   items: ['FastAPI','Flask','Vue.js','R Shiny','SQLAlchemy'] },
   { group: 'Data & Storage',      items: ['PostgreSQL','HDF5','SQLite','Sparse Matrices (dgCMatrix)','PyPI / OSV APIs'] },
-  { group: 'ML & Analysis',       items: ['PyTorch','scikit-learn','SHAP / DeepSHAP','DESeq2','Seurat','Clustering','Dimensionality Reduction'] },
-  { group: 'Infrastructure',      items: ['Docker','HPC / Slurm','Snakemake','Nextflow','pixi','Conda','Git'] },
+  { group: 'ML & Analysis',       items: ['PyTorch','Tensorflow','scikit-learn','SHAP / DeepSHAP','DESeq2','Seurat','Clustering','Dimensionality Reduction'] },
+  { group: 'Infrastructure',      items: ['Docker','HPC / Slurm / SGE','Snakemake','Nextflow','pixi','Conda','Git'] },
   { group: 'Domain Depth',        items: ['NGS Pipeline Design','scRNA-seq Analysis','Variant Effect Prediction','Multi-omics Integration','High-Dimensional Data'] }
 ];
 
@@ -1314,7 +1337,7 @@ const EDUCATION = [
   {
     degree: 'M.S. Bioinformatics',
     school: 'Boston University',
-    period: '2020 – 2022',
+    period: '2021 – 2023',
     gpa: '4.0 / 4.0',
     detail: 'Graduate coursework spanning computational biology, machine learning, statistical genomics, and software engineering. Thesis-level research in genomic data analysis and pipeline development.'
   },
@@ -1322,7 +1345,7 @@ const EDUCATION = [
     degree: 'B.E. Computer Engineering',
     school: 'Pune Institute of Computer Technology',
     period: '2016 – 2020',
-    gpa: null,
+    gpa: '9.26 / 10',
     detail: 'Undergraduate foundation in algorithms, data structures, systems programming, and software engineering principles.'
   }
 ];
