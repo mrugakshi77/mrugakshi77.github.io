@@ -3,1192 +3,1505 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mrugakshi Chidrawar - Bioinformatics Engineer</title>
+    <title>Mrugakshi Chidrawar — Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/build/index.min.js"></script>
-    <script src="portfolio-data-original.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-tertiary: #f0f2f5;
-            --text-primary: #1a1a1a;
-            --text-secondary: #666666;
-            --accent: #ea580c;
-            --accent-light: #f97316;
-            --accent-hover: #c2410c;
-            --border: #e5e7eb;
-            --success: #10b981;
-            --error: #ef4444;
+            --bg:          #0c0c0e;
+            --surface:     #141416;
+            --surface-2:   #1c1c20;
+            --border:      #272729;
+            --border-mid:  #38383e;
+            --text:        #e8e8e8;
+            --text-muted:  #6b6b74;
+            --text-dim:    #33333a;
+            --accent:      #f97316;
+            --accent-dim:  rgba(249,115,22,0.1);
+            --accent-glow: rgba(249,115,22,0.22);
+            --green:       #10b981;
+            --font-display:'Bebas Neue', sans-serif;
+            --font-body:   'DM Sans', -apple-system, sans-serif;
+            --font-mono:   'DM Mono', monospace;
+            --sidebar-w:   256px;
+            --r:           6px;
         }
 
-        html {
-            background: var(--bg-primary);
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        #app {
+        /* dot-grid atmosphere */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(249,115,22,0.07) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── LAYOUT ──────────────────────────────────── */
+        .layout {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .header-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-
-        .header-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            font-weight: 400;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .header-buttons a {
-            padding: 8px 14px;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            border-radius: 6px;
-            font-size: 0.8em;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-
-        .header-buttons a:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(234, 88, 12, 0.04);
-        }
-
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            padding: 100px 40px;
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.02) 0%, rgba(249, 115, 22, 0.02) 100%);
-        }
-
-        .hero-content h1 {
-            font-size: 3.2em;
-            font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-            letter-spacing: -1px;
-        }
-
-        .hero-content .subtitle {
-            font-size: 1.1em;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-weight: 400;
-        }
-
-        .hero-content p {
-            font-size: 0.95em;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            line-height: 1.8;
-            max-width: 500px;
-        }
-
-        .hero-photo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-photo img {
-    width: 320px;
-    height: 320px;
-    border-radius: 16px;
-    border: 2px solid #ea580c;
-    box-shadow: 0 10px 30px rgba(234, 88, 12, 0.12);
-    object-fit: cover;
-    background: white;
-    display: block;
-    position: relative;
-    z-index: 5;
-}
-
-        .cta-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 32px;
-        }
-
-        .cta-btn {
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-transform: none;
-            font-size: 0.9em;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
-            letter-spacing: 0.3px;
-        }
-
-        .cta-btn.primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .cta-btn.primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
-        }
-
-        .cta-btn.secondary {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .cta-btn.secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(234, 88, 12, 0.04);
-        }
-
-        /* Contact Info */
-        .contact-bar {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 40px;
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            font-size: 0.85em;
-            justify-content: center;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-        }
-
-        .contact-item a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent-hover);
-        }
-
-        /* Navigation */
-        .nav-tabs {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-            padding: 0 40px;
-            display: flex;
-            gap: 0;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-tabs button {
-            padding: 14px 20px;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.75em;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }
-
-        .nav-tabs button:hover {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .nav-tabs button.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        /* Clean Bioinformatics Grid Pattern */
-        .main-content::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                /* DNA Helixes on sides */
-                linear-gradient(135deg, transparent 48%, rgba(234, 88, 12, 0.08) 48%, rgba(234, 88, 12, 0.08) 52%, transparent 52%),
-                linear-gradient(45deg, transparent 48%, rgba(234, 88, 12, 0.08) 48%, rgba(234, 88, 12, 0.08) 52%, transparent 52%),
-                /* Subtle grid */
-                linear-gradient(0deg, transparent 24%, rgba(234, 88, 12, 0.03) 25%, rgba(234, 88, 12, 0.03) 26%, transparent 27%, transparent 74%, rgba(234, 88, 12, 0.03) 75%, rgba(234, 88, 12, 0.03) 76%, transparent 77%, transparent 100%),
-                linear-gradient(90deg, transparent 24%, rgba(234, 88, 12, 0.03) 25%, rgba(234, 88, 12, 0.03) 26%, transparent 27%, transparent 74%, rgba(234, 88, 12, 0.03) 75%, rgba(234, 88, 12, 0.03) 76%, transparent 77%, transparent 100%);
-            background-size: 
-                40px 40px,
-                40px 40px,
-                40px 40px,
-                40px 40px;
-            background-position: 
-                0 0,
-                0 0,
-                0 0,
-                0 0;
-            background-attachment: fixed;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Decorative elements - DNA nodes */
-        .main-content::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle, rgba(234, 88, 12, 0.15) 1px, transparent 1px),
-                radial-gradient(circle, rgba(234, 88, 12, 0.1) 1.5px, transparent 1.5px),
-                radial-gradient(circle, rgba(234, 88, 12, 0.12) 2px, transparent 2px);
-            background-size: 
-                80px 80px,
-                120px 120px,
-                200px 200px;
-            background-position: 
-                0 0,
-                40px 40px,
-                100px 100px;
-            background-attachment: fixed;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 80px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: var(--bg-primary);
-            position: relative;
-        }
-
-        .section {
-            width: 100%;
-            max-width: 1400px;
-            display: none;
             position: relative;
             z-index: 1;
         }
 
-        .section.active {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 2em;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 50px;
-            text-align: center;
-            letter-spacing: -0.5px;
-            display:none;
-        }
-
-        /* Card Grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-            width: 100%;
-        }
-
-        /* Card */
-        .card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* ── SIDEBAR ─────────────────────────────────── */
+        .sidebar {
+            width: var(--sidebar-w);
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            height: 100%;
+            padding: 40px 22px;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        /* subtle vertical scan-line texture on sidebar */
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255,255,255,0.012) 3px,
+                rgba(255,255,255,0.012) 4px
+            );
+            pointer-events: none;
+        }
+
+        .sidebar-brand {
+            margin-bottom: 44px;
             position: relative;
         }
 
-        .card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 12px 24px rgba(234, 88, 12, 0.12);
-            transform: translateY(-4px);
+        .sidebar-name {
+            font-family: var(--font-display);
+            font-size: 1.75em;
+            letter-spacing: 3px;
+            color: var(--text);
+            line-height: 1.05;
         }
 
-        /* Company Logo */
-        .card-company {
-            width: 100%;
-            height: 100px;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--border);
-            padding: 16px;
+        .sidebar-role {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
         }
 
-        .card-company img {
-            max-width: 80%;
-            max-height: 80%;
-            object-fit: contain;
-        }
-
-        /* Card Icon */
-        .card-icon {
-            width: 100%;
-            height: 80px;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5em;
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Card Content */
-        .card-content {
-            padding: 24px;
+        .sidebar-nav {
             flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 2px;
         }
 
-        .card-title {
-            font-size: 1.05em;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            line-height: 1.3;
-            letter-spacing: -0.3px;
-        }
-
-        .card-subtitle {
-            font-size: 0.8em;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            margin-bottom: 12px;
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 11px;
+            border-radius: var(--r);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.78em;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
         }
 
-        .card-description {
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 12px;
+        .nav-num {
+            font-family: var(--font-mono);
+            font-size: 0.78em;
+            color: var(--text-dim);
+            width: 18px;
+            transition: color 0.2s;
         }
 
-        .card-tags {
+        .nav-item:hover {
+            color: var(--text);
+            background: var(--surface-2);
+        }
+
+        .nav-item.active {
+            color: var(--text);
+            background: var(--surface-2);
+            border-left-color: var(--accent);
+            padding-left: 9px;
+        }
+
+        .nav-item.active .nav-num { color: var(--accent); }
+
+        .sidebar-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-contact-line {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-contact-line a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .sidebar-contact-line a:hover { color: var(--accent); }
+
+        .sidebar-socials {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin-top: auto;
+            margin-top: 4px;
         }
 
-        .card-tag {
-            display: inline-block;
-            padding: 4px 10px;
-            background: var(--bg-secondary);
-            color: var(--accent);
-            border-radius: 6px;
-            font-size: 0.7em;
-            text-transform: uppercase;
-            font-weight: 600;
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 9px;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.65em;
+            font-family: var(--font-mono);
             letter-spacing: 0.3px;
-            border: 1px solid var(--border);
+            transition: all 0.2s;
         }
 
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-            backdrop-filter: blur(4px);
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .modal {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .modal-header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            padding: 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .modal-header-content {
+        /* ── MAIN ─────────────────────────────────────── */
+        .main {
+            margin-left: var(--sidebar-w);
             flex: 1;
+            padding: 0 64px;
+            max-width: calc(100% - var(--sidebar-w));
         }
 
-        .modal-header-content h2 {
-            font-size: 1.8em;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        /* ── SECTION BASE ────────────────────────────── */
+        .section {
+            padding: 96px 0;
+            max-width: 860px;
         }
 
-        .modal-header-content p {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            font-weight: 500;
+        .section + .section {
+            border-top: 1px solid var(--border);
         }
 
-        .modal-close {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            font-size: 1.5em;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            padding: 0;
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.68em;
+            color: var(--accent);
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.8em;
+            letter-spacing: 3px;
+            color: var(--text);
+            margin-bottom: 44px;
             line-height: 1;
+        }
+
+        /* ── HERO ─────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 80px;
+            max-width: 860px;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.72em;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 12px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
             flex-shrink: 0;
         }
 
-        .modal-close:hover {
-            border-color: var(--accent);
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(3.2em, 6.5vw, 5.6em);
+            line-height: 0.93;
+            letter-spacing: 3px;
+            color: var(--text);
+            margin-bottom: 36px;
+        }
+
+        .hero-headline .hl-accent {
             color: var(--accent);
-            background: var(--bg-secondary);
+            display: block;
         }
 
-        .modal-content {
-            padding: 32px;
+        .hero-body {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 48px;
+            align-items: start;
         }
 
-        .modal-section {
-            margin-bottom: 28px;
+        .hero-bio {
+            font-size: 0.96em;
+            color: var(--text-muted);
+            line-height: 1.85;
         }
 
-        .modal-section-title {
-            font-size: 1em;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 14px;
+        .hero-bio + .hero-bio { margin-top: 12px; }
+
+        .hero-bio strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 28px;
+            margin: 36px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            border-left: 2px solid var(--accent);
+            padding-left: 14px;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2em;
+            letter-spacing: 1px;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.6em;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 3px;
         }
 
-        .modal-section-content {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 0.95em;
+        .hero-cta {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        .modal-section-content ul {
+        .hero-photo img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--border-mid);
+            filter: grayscale(15%) brightness(0.92);
+            transition: filter 0.3s;
+        }
+
+        .hero-photo img:hover { filter: grayscale(0%) brightness(1); }
+
+        /* ── BUTTONS ─────────────────────────────────── */
+        .btn-primary {
+            padding: 11px 22px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--r);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.83em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary:hover {
+            background: #ea6c0a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            padding: 11px 22px;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border-mid);
+            border-radius: var(--r);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.83em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── PROJECTS ────────────────────────────────── */
+        .projects-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 26px 30px;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.22s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-mid);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+            transform: translateY(-2px);
+        }
+
+        .project-card:hover::after { opacity: 1; }
+
+        .project-card.featured {
+            border-color: rgba(249,115,22,0.25);
+            background: linear-gradient(130deg, var(--surface) 60%, rgba(249,115,22,0.04) 100%);
+        }
+
+        .project-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.2px;
+            line-height: 1.4;
+        }
+
+        .badges {
+            display: flex;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 0.58em;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge-live   { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+        .badge-feat   { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(249,115,22,0.2); }
+
+        .project-desc {
+            font-size: 0.86em;
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        /* Engineering Parallels block */
+        .eng-parallel {
+            background: rgba(249,115,22,0.04);
+            border: 1px solid rgba(249,115,22,0.14);
+            border-radius: var(--r);
+            padding: 10px 14px;
+            margin: 14px 0;
+        }
+
+        .ep-label {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            color: var(--accent);
+            opacity: 0.65;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .ep-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+        }
+
+        .ep-item {
+            font-family: var(--font-mono);
+            font-size: 0.71em;
+            color: var(--text-muted);
+        }
+
+        .ep-item::before {
+            content: '→ ';
+            color: var(--accent);
+        }
+
+        .project-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            gap: 12px;
+        }
+
+        .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            padding: 3px 7px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        .project-link {
+            font-family: var(--font-mono);
+            font-size: 0.68em;
+            color: var(--accent);
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: opacity 0.2s;
+        }
+
+        .project-link:hover { opacity: 0.75; text-decoration: underline; }
+
+        /* ── EXPERIENCE ──────────────────────────────── */
+        .timeline {
+            position: relative;
+            padding-left: 22px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 8px; bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 52px;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -26px; top: 6px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--bg);
+        }
+
+        .tl-period {
+            font-family: var(--font-mono);
+            font-size: 0.68em;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .tl-title {
+            font-size: 1.04em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .tl-company {
+            font-size: 0.84em;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .tl-list {
             list-style: none;
             padding: 0;
         }
 
-        .modal-section-content li {
+        .tl-list li {
+            font-size: 0.875em;
+            color: var(--text-muted);
+            line-height: 1.7;
             padding-left: 18px;
-            margin-bottom: 10px;
             position: relative;
+            margin-bottom: 7px;
         }
 
-        .modal-section-content li::before {
+        .tl-list li::before {
             content: '→';
             position: absolute;
             left: 0;
             color: var(--accent);
-            font-weight: 600;
         }
 
-        .modal-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+        .tl-tags { margin-top: 14px; display: flex; gap: 5px; flex-wrap: wrap; }
+
+        /* ── SKILLS ──────────────────────────────────── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 14px;
         }
 
-        .modal-tag {
-            padding: 6px 12px;
-            background: var(--bg-secondary);
-            color: var(--accent);
-            border-radius: 8px;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            font-weight: 600;
+        .skill-group {
+            background: var(--surface);
             border: 1px solid var(--border);
-            letter-spacing: 0.3px;
+            border-radius: 10px;
+            padding: 20px 22px;
         }
 
-        /* Contact Form */
-        .contact-section {
+        .sg-title {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 13px;
+        }
+
+        .sg-items { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .skill-item {
+            font-size: 0.78em;
+            padding: 4px 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        /* ── EDUCATION ───────────────────────────────── */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .edu-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 26px 28px;
+        }
+
+        .edu-degree {
+            font-size: 1.04em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .edu-school {
+            font-size: 0.84em;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .edu-meta {
+            font-family: var(--font-mono);
+            font-size: 0.67em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .edu-detail {
+            font-size: 0.86em;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* ── CONTACT ─────────────────────────────────── */
+        .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            width: 100%;
+            gap: 36px;
             align-items: start;
         }
 
-        .contact-form {
-            background: var(--bg-primary);
+        .contact-form-wrap {
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            width: 100%;
+            border-radius: 10px;
+            padding: 30px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 16px; }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: none;
-            font-size: 0.9em;
-            letter-spacing: 0;
+            font-family: var(--font-mono);
+            font-size: 0.65em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            background: var(--bg-secondary);
+            padding: 10px 12px;
+            background: var(--bg);
             border: 1px solid var(--border);
-            color: var(--text-primary);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95em;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-secondary);
+            color: var(--text);
+            border-radius: var(--r);
+            font-family: var(--font-body);
+            font-size: 0.9em;
+            transition: border-color 0.2s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+            box-shadow: 0 0 0 3px var(--accent-dim);
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--text-dim); }
 
         .submit-btn {
+            width: 100%;
+            padding: 11px;
             background: var(--accent);
-            color: white;
+            color: #fff;
             border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
+            border-radius: var(--r);
+            font-family: var(--font-body);
             font-weight: 600;
-            text-transform: none;
+            font-size: 0.88em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover { background: #ea6c0a; }
+
+        #map {
+            height: 400px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            filter: brightness(0.78) saturate(0.85);
+        }
+
+        /* ── MODAL ───────────────────────────────────── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.72);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border-mid);
+            border-radius: 12px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            animation: modal-in 0.22s ease;
+        }
+
+        @keyframes modal-in {
+            from { opacity: 0; transform: translateY(14px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0)   scale(1); }
+        }
+
+        .modal-head {
+            padding: 26px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            z-index: 1;
+        }
+
+        .modal-head h2 {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.2px;
+        }
+
+        .modal-head p {
+            font-family: var(--font-mono);
+            font-size: 0.65em;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 30px; height: 30px;
+            border-radius: var(--r);
             cursor: pointer;
             font-size: 0.9em;
-            letter-spacing: 0.3px;
-            transition: all 0.2s ease;
-            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
 
-        .submit-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+        .modal-body { padding: 26px 30px; }
+
+        .modal-section { margin-bottom: 22px; }
+
+        .modal-stitle {
+            font-family: var(--font-mono);
+            font-size: 0.62em;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
         }
 
-        .submit-btn:disabled {
-            background: var(--text-secondary);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .form-message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            display: none;
+        .modal-content-text {
             font-size: 0.9em;
+            color: var(--text-muted);
+            line-height: 1.8;
         }
 
-        .form-message.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            display: block;
+        .modal-content-text ul { list-style: none; padding: 0; }
+
+        .modal-content-text li {
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 8px;
         }
 
-        .form-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            display: block;
-        }
+        .modal-content-text li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
-        /* Map */
-        #map {
-            width: 100%;
-            height: 500px;
+        .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .modal-tag {
+            font-family: var(--font-mono);
+            font-size: 0.68em;
+            padding: 4px 9px;
+            background: var(--surface-2);
             border: 1px solid var(--border);
-            border-radius: 12px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: slideUp 0.4s ease-out backwards;
-        }
-
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 0.08s; }
-        .card:nth-child(3) { animation-delay: 0.16s; }
-        .card:nth-child(4) { animation-delay: 0.24s; }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
             border-radius: 4px;
+            color: var(--text-muted);
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
+        /* ── MOBILE HEADER ───────────────────────────── */
+        .mobile-header {
+            display: none;
+            position: sticky;
+            top: 0; z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 80px 30px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.4em;
-            }
-
-            .contact-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
+        .mobile-name {
+            font-family: var(--font-display);
+            font-size: 1.15em;
+            letter-spacing: 2.5px;
         }
 
-        @media (max-width: 768px) {
-            .header {
-                padding: 14px 20px;
-            }
+        .hamburger {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            color: var(--text-muted);
+            padding: 7px 11px;
+            cursor: pointer;
+            font-size: 0.75em;
+            font-family: var(--font-mono);
+        }
 
-            .contact-bar {
-                padding: 10px 20px;
-                font-size: 0.8em;
-                gap: 15px;
-            }
+        .mobile-drawer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 200;
+        }
 
-            .nav-tabs {
-                padding: 0 20px;
-                overflow-x: auto;
-            }
+        .mobile-drawer.open { display: flex; }
 
-            .nav-tabs button {
-                padding: 12px 16px;
-                font-size: 0.7em;
-            }
+        .mobile-drawer-inner {
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            width: 230px;
+            height: 100%;
+            padding: 28px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
 
-            .main-content {
-                padding: 60px 20px;
-            }
+        .drawer-close {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            color: var(--text-muted);
+            padding: 6px 10px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.7em;
+            margin-bottom: 16px;
+            align-self: flex-start;
+        }
 
-            .hero {
-                padding: 50px 20px;
-            }
+        /* ── ANIMATIONS ──────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fade-up 0.45s ease forwards;
+        }
 
-            .hero-content h1 {
-                font-size: 2em;
-            }
+        @keyframes fade-up {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            .hero-photo img {
-                width: 240px;
-                height: 240px;
-            }
+        .fade-up:nth-child(1) { animation-delay: 0.00s; }
+        .fade-up:nth-child(2) { animation-delay: 0.07s; }
+        .fade-up:nth-child(3) { animation-delay: 0.14s; }
+        .fade-up:nth-child(4) { animation-delay: 0.21s; }
+        .fade-up:nth-child(5) { animation-delay: 0.28s; }
+        .fade-up:nth-child(6) { animation-delay: 0.35s; }
 
-            .card-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
+        /* ── SCROLLBAR ───────────────────────────────── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-            #map {
-                height: 300px;
-            }
+        /* ── RESPONSIVE ──────────────────────────────── */
+        @media (max-width: 960px) {
+            .sidebar { display: none; }
+            .mobile-header { display: flex; }
+            .main { margin-left: 0; padding: 0 24px; max-width: 100%; }
+            .hero-body { grid-template-columns: 1fr; }
+            .hero-photo { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+            #map { height: 280px; }
+        }
 
-            .section-title {
-                margin-bottom: 40px;
-                font-size: 1.5em;
-            }
+        @media (max-width: 580px) {
+            .main { padding: 0 16px; }
+            .hero-stats { gap: 18px; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .section { padding: 72px 0; }
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-left">
+
+<!-- Mobile header -->
+<header class="mobile-header">
+    <div class="mobile-name">MRUGAKSHI C.</div>
+    <button class="hamburger" onclick="openDrawer()">☰ MENU</button>
+</header>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer" onclick="if(event.target===this)closeDrawer()">
+    <div class="mobile-drawer-inner">
+        <button class="drawer-close" onclick="closeDrawer()">✕ CLOSE</button>
+        <a class="nav-item" href="#projects"   onclick="closeDrawer()"><span class="nav-num">01</span>Projects</a>
+        <a class="nav-item" href="#experience" onclick="closeDrawer()"><span class="nav-num">02</span>Experience</a>
+        <a class="nav-item" href="#skills"     onclick="closeDrawer()"><span class="nav-num">03</span>Skills</a>
+        <a class="nav-item" href="#education"  onclick="closeDrawer()"><span class="nav-num">04</span>Education</a>
+        <a class="nav-item" href="#contact"    onclick="closeDrawer()"><span class="nav-num">05</span>Contact</a>
+    </div>
+</div>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-name">MRUGAKSHI<br>CHIDRAWAR</div>
+            <div class="sidebar-role">Software Engineer</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a class="nav-item" href="#projects">  <span class="nav-num">01</span>Projects</a>
+            <a class="nav-item" href="#experience"><span class="nav-num">02</span>Experience</a>
+            <a class="nav-item" href="#skills">    <span class="nav-num">03</span>Skills</a>
+            <a class="nav-item" href="#education"> <span class="nav-num">04</span>Education</a>
+            <a class="nav-item" href="#contact">   <span class="nav-num">05</span>Contact</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-contact-line">📍 Santa Clara, CA</div>
+            <div class="sidebar-contact-line"><a href="mailto:mrugakshi77@gmail.com">mrugakshi77@gmail.com</a></div>
+            <div class="sidebar-socials">
+                <a class="social-link" href="https://github.com/mrugakshi77/" target="_blank">↗ GitHub</a>
+                <a class="social-link" href="https://www.linkedin.com/in/mrugakshi-chidrawar-827127179/" target="_blank">↗ LinkedIn</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- HERO -->
+        <section id="hero" class="section">
+            <div class="hero-eyebrow">Available for new roles · Santa Clara, CA</div>
+            <h1 class="hero-headline">
+                SOFTWARE<br>
+                ENGINEER<br>
+                <span class="hl-accent">&amp; DATA SYSTEMS</span>
+                BUILDER
+            </h1>
+            <div class="hero-body">
                 <div>
-                    <div class="header-title">Mrugakshi Chidrawar</div>
-                    <div class="header-subtitle">Bioinformatics Engineer</div>
+                    <p class="hero-bio">
+                        I build <strong>production-grade data pipelines</strong>, ML-backed web applications,
+                        and scalable backend systems. My engineering experience comes from working with some
+                        of the most demanding data that exists — <strong>millions of records, hundreds of features,
+                        multi-modal inputs</strong>, and downstream systems researchers depend on daily.
+                    </p>
+                    <p class="hero-bio" style="margin-top:12px;">
+                        That background translates directly: <strong>batch correction → normalization at scale</strong>;
+                        variant prediction over 22M records → <strong>low-latency retrieval systems</strong>;
+                        HPC pipeline optimization → <strong>distributed workflow orchestration</strong>.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">22M+</div>
+                            <div class="stat-label">Records served</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">58K</div>
+                            <div class="stat-label">Cells analyzed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">40%</div>
+                            <div class="stat-label">Compute reduction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">99.4%</div>
+                            <div class="stat-label">Model accuracy</div>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <a href="#projects"   class="btn-primary">View Projects</a>
+                        <a href="#contact"    class="btn-secondary">Get in Touch</a>
+                        <a href="https://github.com/mrugakshi77/" target="_blank" class="btn-secondary">GitHub ↗</a>
+                    </div>
                 </div>
-            </div>
-            <div class="header-buttons">
-                <a href="https://github.com/mrugakshi77/" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/mrugakshi-chidrawar-827127179/" target="_blank">LinkedIn</a>
-                <a href="https://vep.corces.gladstone.org/" target="_blank">VEP Platform</a>
-            </div>
-        </div>
-
-        <!-- Contact Info Bar -->
-        <div class="contact-bar">
-            <div class="contact-item">📍 Santa Clara, CA</div>
-            <div class="contact-item">
-                <a href="tel:+18574984162">📞 +1 (857) 498-4162</a>
-            </div>
-            <div class="contact-item">
-                <a href="mailto:mrugakshi77@gmail.com">✉️ mrugakshi77@gmail.com</a>
-            </div>
-        </div>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Bridging Computation & Biology</h1>
-                <p class="subtitle">Building tools that turn genomic data into biological insights</p>
-                <p>I'm a bioinformatics engineer with 3+ years building NGS pipelines, ML-powered variant prediction, and production research platforms. I thrive at the intersection of computational biology and wet lab science, translating complex genomic workflows into accessible tools that empower discovery.</p>
-                <div class="cta-buttons">
-                    <a href="#experience" class="cta-btn primary" onclick="scrollToExperience(); return false;">View My Work</a>
-                    <a href="#contact" class="cta-btn secondary" onclick="scrollToContact(); return false;">Get in Touch</a>
+                <div class="hero-photo">
+                    <img src="mrugakshi_photo.jfif" alt="Mrugakshi Chidrawar">
                 </div>
-            </div>
-            <div class="hero-photo">
-                <img src="mrugakshi_photo.jfif" alt="Mrugakshi Chidrawar">
             </div>
         </section>
 
-        <!-- Navigation -->
-        <div class="nav-tabs">
-            <button onclick="switchTab('experience')" class="nav-btn active">Experience</button>
-            <button onclick="switchTab('projects')" class="nav-btn">Projects</button>
-            <button onclick="switchTab('skills')" class="nav-btn">Skills</button>
-            <button onclick="switchTab('education')" class="nav-btn">Education</button>
-            <button onclick="switchTab('contact')" class="nav-btn">Contact</button>
-        </div>
+        <!-- PROJECTS -->
+        <section id="projects" class="section">
+            <div class="section-label">// 01</div>
+            <h2 class="section-title">PROJECTS</h2>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </section>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Experience Section -->
-            <section id="experience" class="section active">
-                <!-- <h2 class="section-title">Experience</h2> -->
-                <div class="card-grid" id="experienceGrid"></div>
-            </section>
+        <!-- EXPERIENCE -->
+        <section id="experience" class="section">
+            <div class="section-label">// 02</div>
+            <h2 class="section-title">EXPERIENCE</h2>
+            <div class="timeline" id="experienceTimeline"></div>
+        </section>
 
-            <!-- Projects Section -->
-            <section id="projects" class="section">
-                <!-- <h2 class="section-title">Projects</h2> -->
-                <div class="card-grid" id="projectsGrid"></div>
-            </section>
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+            <div class="section-label">// 03</div>
+            <h2 class="section-title">SKILLS</h2>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </section>
 
-            <!-- Skills Section -->
-            <section id="skills" class="section">
-                <!-- <h2 class="section-title">Skills</h2> -->
-                <div class="card-grid" id="skillsGrid"></div>
-            </section>
+        <!-- EDUCATION -->
+        <section id="education" class="section">
+            <div class="section-label">// 04</div>
+            <h2 class="section-title">EDUCATION</h2>
+            <div class="edu-grid" id="educationGrid"></div>
+        </section>
 
-            <!-- Education Section -->
-            <section id="education" class="section">
-                <!-- <h2 class="section-title">Education</h2> -->
-                <div class="card-grid" id="educationGrid"></div>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contact" class="section">
-                <!-- <h2 class="section-title">Get in Touch</h2> -->
-                <div class="contact-section">
-                    <div class="contact-form">
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" placeholder="Your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="your@email.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" placeholder="Message subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" placeholder="Your message here..." required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Send Message</button>
-                            <div id="formMessage"></div>
-                        </form>
-                    </div>
-                    <div id="map"></div>
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+            <div class="section-label">// 05</div>
+            <h2 class="section-title">CONTACT</h2>
+            <div class="contact-grid">
+                <div class="contact-form-wrap">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="cName" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="cEmail" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="cSubject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="cMessage" placeholder="Your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message →</button>
+                    </form>
                 </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay') closeModal()">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-header-content">
-                    <h2 id="modalTitle"></h2>
-                    <p id="modalSubtitle"></p>
-                </div>
-                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div id="map"></div>
             </div>
-            <div class="modal-content" id="modalContent"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay')closeModal()">
+    <div class="modal">
+        <div class="modal-head">
+            <div>
+                <h2 id="mTitle"></h2>
+                <p id="mSub"></p>
+            </div>
+            <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
+        <div class="modal-body" id="mBody"></div>
     </div>
+</div>
 
-    <script>
-        // Use external portfolio data
-        let data = {};
-        
-        // Define all functions FIRST so HTML onclick handlers can find them
-        function switchTab(tab) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────────────────────
 
-            if (tab === 'contact') {
-                setTimeout(() => initMap(), 100);
-            }
-        }
+const PROJECTS = [
+  {
+    id: 'depradar',
+    title: 'DepRadar v2 — Python Dependency Risk Scanner',
+    badges: ['live','featured'],
+    desc: 'Scans Python dependencies for 4 risk signals: outdated, abandoned, deprecated, and vulnerable (CVEs via OSV.dev). Supports requirements.txt upload, direct GitHub repo scanning, a full REST API, and a CLI tool with a <code>--fail-on</code> flag built for CI/CD gate integration.',
+    parallel: ['async fan-out + semaphore', 'two-layer caching strategy', 'weighted risk scoring engine', 'REST API + Typer CLI', 'CI/CD pipeline gate'],
+    tags: ['Python','FastAPI','PostgreSQL','SQLAlchemy','Docker','Async','Typer CLI'],
+    link: 'https://depradar.onrender.com', linkLabel: '↗ Live Demo',
+    details: [
+      'Bounded async fan-out via asyncio.gather + Semaphore(10) — scan time scales with slowest single package, not the sum of all',
+      'Two-layer caching: PackageCache per PyPI package (TTL 12h) + ScanPackage denormalisation for O(1) report retrieval with a single DB query',
+      'Weighted risk scoring normalised 0–100: critical=40pts, high=25pts, medium=15pts, low=5pts',
+      'GitHub integration: resolves default branch via Repos API, fetches raw requirements file, supports private repos via GITHUB_TOKEN',
+      'CLI --fail-on flag exits with code 1 if risk threshold exceeded — drop-in for GitHub Actions, CircleCI, or any CI pipeline',
+      'Full OpenAPI/Swagger documentation auto-generated at /docs'
+    ]
+  },
+  {
+    id: 'vep',
+    title: 'Variant Effect Prediction Platform',
+    badges: ['live'],
+    desc: 'Full-stack web app serving predictions over 22M+ genomic variant records from ChromBPNet, a deep learning model for regulatory genomics. Features a custom HDF5 retrieval backend, batch querying, DeepSHAP-based model interpretation, expanded input type support, and downloadable high-resolution visualizations.',
+    parallel: ['large-scale feature store (22M+ records)', 'custom HDF5 indexing for fast retrieval', 'batch query API design', 'ML interpretability (DeepSHAP)', 'full-stack end-to-end deployment'],
+    tags: ['Python','Flask','JavaScript','HDF5','ChromBPNet','SHAP','Vue.js'],
+    link: 'https://vep.corces.gladstone.org/', linkLabel: '↗ Live App',
+    details: [
+      'Custom HDF5 retrieval layer delivers sub-second query performance on a 22M+ record dataset — too large for conventional relational storage',
+      'Batch querying API: simultaneous multi-variant processing dramatically reduces round-trips for power users',
+      'DeepSHAP integration provides nucleotide-level attribution scores, visualized as sequence logos for model interpretability',
+      'Led full UI overhaul: improved accessibility, expanded variant input type support, downloadable publication-ready export',
+      'End-to-end ownership: data layer → Flask API → JavaScript frontend → deployed production system'
+    ]
+  },
+  {
+    id: 'pss',
+    title: 'pSS Biomarker Discovery Dashboard',
+    badges: ['live'],
+    desc: 'End-to-end single-cell RNA-seq analysis of ~58,000 peripheral blood immune cells from a public autoimmune disease cohort (GEO: GSE157278). Reproduces and extends findings from Hong et al. 2021. Includes a fully deployed R Shiny dashboard with real-time gene expression overlays and a memory-optimized sparse data pipeline (4 GB → under 200 MB).',
+    parallel: ['sparse matrix optimization (4 GB → 200 MB)', 'interactive data dashboard w/ real-time filtering', 'statistical hypothesis testing at scale', 'free-tier cloud deployment of a data-heavy app', 'reproducible analysis pipeline (990 DEGs)'],
+    tags: ['R','Seurat','R Shiny','ggplot2','sparse matrix','GEOquery','DESeq2'],
+    link: 'https://mrugakshi77.shinyapps.io/pss-biomarker-explorer', linkLabel: '↗ Live App',
+    details: [
+      '58,000 cells × 2,000 HVGs stored as a sparse dgCMatrix — memory footprint reduced from ~4 GB to under 200 MB, enabling deployment on free-tier shinyapps.io',
+      'Full QC pipeline: feature filtering, mitochondrial % cutoffs, LogNormalize, PCA (30 PCs) → UMAP → Louvain clustering (27 clusters)',
+      '990 statistically significant DEGs identified (logFC > 0.25, adj. p < 0.05) — HLA-DRB5, GZMA, GZMB among top hits, confirming published cytotoxic CD4⁺ T cell expansion in pSS',
+      'R Shiny app: real-time UMAP coloring by any of 2,000 genes, volcano plot, filterable biomarker table, violin/dot/scatter plots for custom gene sets',
+      'Demonstrates: building memory-efficient data pipelines and interactive dashboards that run on constrained infrastructure'
+    ]
+  },
+  {
+    id: 'pipeline',
+    title: 'Multi-Omics Processing Pipeline',
+    badges: [],
+    desc: 'Production Snakemake pipeline integrating gene expression and chromatin accessibility data from paired single-cell sequencing experiments. Engineered for HPC with a 40% compute reduction through parallelization, Demuxlet-based sample deconvolution, automated QC checkpoints, and modular rule-based task orchestration.',
+    parallel: ['multi-modal ETL pipeline design', 'HPC workflow orchestration (Snakemake)', '40% compute optimization via parallelization', 'automated QC + data quality gates', 'modular pipeline — steps add/remove without full reruns'],
+    tags: ['Python','R','Snakemake','HPC','Slurm','Conda','Jupyter'],
+    link: null,
+    details: [
+      'Integrates two data modalities per sample (RNA expression + chromatin accessibility) — equivalent to a multi-source ETL with cross-modal validation gates',
+      'Demuxlet integration for cell-level sample deconvolution and doublet detection — equivalent to deduplication and data quality enforcement in data pipelines',
+      'Intelligent parallelization across samples and modalities reduced HPC compute time by 40%',
+      'Modular Snakemake rules: any stage can be modified and rerun without invalidating upstream steps — similar to idempotent task design in Airflow/Prefect',
+      'Automated QC summary visualizations at each checkpoint for monitoring pipeline health'
+    ]
+  },
+  {
+    id: 'pacbio',
+    title: 'PacBio HiFi SARS-CoV-2 Variant Calling Pipeline',
+    badges: [],
+    desc: 'Complete pipeline for analyzing real PacBio HiFi long-read sequencing data of SARS-CoV-2 (Omicron sample). Covers alignment, Longshot-based variant calling, concordance analysis against reference VCFs, multi-panel QC visualizations, and fully reproducible execution via pixi. Processes 129,915 reads at 2902x genome coverage.',
+    parallel: ['clinical data processing pipeline', 'multi-step variant detection workflow', 'automated QC + visualization at scale', 'reproducible environment management (pixi)', 'concordance validation against ground truth'],
+    tags: ['Python','minimap2','samtools','bcftools','Longshot','pixi','Jupyter'],
+    link: 'https://github.com/mrugakshi77/pacbio-hifi-sars2-variant-calling', linkLabel: '↗ GitHub',
+    details: [
+      '129,915 PacBio HiFi reads aligned to SARS-CoV-2 reference (NC_045512.2) using minimap2 asm20 preset, achieving 2902x genome coverage',
+      'Longshot variant caller designed for long-read HiFi data on haploid genomes — SNP calling with phasing support',
+      'Variant concordance analysis against PacBio reference VCFs with SNP/indel breakdown and concordance metrics',
+      'QC visualization suite: read length distributions, cumulative sequencing depth curves, multi-panel summary figures',
+      'Fully reproducible with pixi — locked dependency environment, portable across systems without manual setup'
+    ]
+  },
+  {
+    id: 'tcga',
+    title: 'TCGA Cancer Type Classifier',
+    badges: [],
+    desc: 'Deep learning multi-class classifier distinguishing cancer types from TCGA gene expression profiles with 99.38% test accuracy. Demonstrates high-dimensional ML classification on a biologically complex dataset with thousands of features.',
+    parallel: ['high-dimensional classification (1000s of features)', 'multi-class deep learning pipeline', 'rigorous train/val/test evaluation', 'feature selection at scale'],
+    tags: ['Python','PyTorch','scikit-learn','pandas','numpy','TCGA'],
+    link: null,
+    details: [
+      '99.38% test accuracy on multi-class cancer type classification from RNA-seq gene expression profiles',
+      'Input space spans thousands of gene features — requires principled feature selection and dimensionality management',
+      'Stratified train/val/test split ensures balanced class representation across cancer types',
+      'The core challenge — classification in very high-dimensional, noisy feature spaces — maps directly to any tabular ML problem at scale'
+    ]
+  }
+];
 
-        function scrollToExperience() {
-            document.getElementById('experience').scrollIntoView({ behavior: 'smooth' });
-            switchTab('experience');
-        }
+const EXPERIENCE = [
+  {
+    title: 'Bioinformatics Software Engineer',
+    company: 'Gladstone Institutes — Corces Lab',
+    period: '2022 – 2024',
+    highlights: [
+      'Led full-stack overhaul of the Variant Effect Prediction Platform: HDF5 backend serving 22M+ records, batch querying API, DeepSHAP model interpretation, and downloadable result exports',
+      'Built production snMultiome pipeline integrating two data modalities per sample on HPC; engineered parallelization achieving 40% compute reduction with Demuxlet-based sample deconvolution',
+      'Performed scRNA-seq clustering reanalysis using CHOIR on mouse hypothalamus dataset, resolving two novel OPC subtypes across 45→47 clusters with GO enrichment validation',
+      'Maintained and extended shared research codebase (Python, R, Snakemake) used by multiple team members across concurrent projects'
+    ],
+    tags: ['Python','R','Flask','Vue.js','HDF5','Snakemake','HPC','SHAP','Seurat']
+  },
+  {
+    title: 'Bioinformatics Intern',
+    company: 'Pfizer',
+    period: '2021',
+    highlights: [
+      'Applied computational methods to biological data analysis in a pharmaceutical research context',
+      'Developed and validated analytical pipelines supporting research workflows with structured, high-dimensional biological datasets',
+      'Statistical modeling and feature engineering on multi-variable datasets with domain-specific constraints'
+    ],
+    tags: ['Python','R','Statistical Modeling','Pipeline Development']
+  }
+];
 
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            switchTab('contact');
-        }
+const SKILLS = [
+  { group: 'Languages',           items: ['Python','R','SQL','JavaScript','HTML/CSS','Bash'] },
+  { group: 'Frameworks & APIs',   items: ['FastAPI','Flask','Vue.js','R Shiny','SQLAlchemy','Typer'] },
+  { group: 'Data & Storage',      items: ['PostgreSQL','HDF5','SQLite','Sparse Matrices (dgCMatrix)','PyPI / OSV APIs'] },
+  { group: 'ML & Analysis',       items: ['PyTorch','scikit-learn','SHAP / DeepSHAP','DESeq2','Seurat','Clustering','Dimensionality Reduction'] },
+  { group: 'Infrastructure',      items: ['Docker','HPC / Slurm','Snakemake','Nextflow','pixi','Conda','Git'] },
+  { group: 'Domain Depth',        items: ['NGS Pipeline Design','scRNA-seq Analysis','Variant Effect Prediction','Multi-omics Integration','High-Dimensional Data'] }
+];
 
-        function openModal(type, id) {
-            const item = data[type].find(i => i.id === id);
-            if (!item) return;
+const EDUCATION = [
+  {
+    degree: 'M.S. Bioinformatics',
+    school: 'Boston University',
+    period: '2020 – 2022',
+    gpa: '4.0 / 4.0',
+    detail: 'Graduate coursework spanning computational biology, machine learning, statistical genomics, and software engineering. Thesis-level research in genomic data analysis and pipeline development.'
+  },
+  {
+    degree: 'B.E. Computer Engineering',
+    school: 'Pune Institute of Computer Technology',
+    period: '2016 – 2020',
+    gpa: null,
+    detail: 'Undergraduate foundation in algorithms, data structures, systems programming, and software engineering principles.'
+  }
+];
 
-            document.getElementById('modalTitle').textContent = item.title || item.name;
-            document.getElementById('modalSubtitle').textContent = item.company || item.school || item.date || '';
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────────────────────
 
-            let content = '';
-            if (type === 'experience') {
-                content = `
-                    <div class="modal-section">
-                        <div class="modal-section-title">Key Highlights</div>
-                        <div class="modal-section-content">
-                            <ul>${item.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
-                        </div>
-                    </div>
-                    <div class="modal-section">
-                        <div class="modal-section-title">Technologies</div>
-                        <div class="modal-tags">${item.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}</div>
-                    </div>
-                `;
-            } else if (type === 'projects') {
-                content = `
-                    <div class="modal-section">
-                        <div class="modal-section-title">Overview</div>
-                        <div class="modal-section-content">${item.description}</div>
-                    </div>
-                    <div class="modal-section">
-                        <div class="modal-section-title">Details</div>
-                        <div class="modal-section-content">
-                            <ul>${item.details.map(d => `<li>${d}</li>`).join('')}</ul>
-                        </div>
-                    </div>
-                    <div class="modal-section">
-                        <div class="modal-section-title">Technologies</div>
-                        <div class="modal-tags">${item.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}</div>
-                    </div>
-                    ${item.github ? `<div class="modal-section">
-                        <div class="modal-section-title">Repository</div>
-                        <div class="modal-section-content">
-                            <a href="${item.github}" target="_blank" style="color: #ea580c; text-decoration: none; font-weight: 600;">→ View on GitHub</a>
-                        </div>
-                    </div>` : ''}
-                `;
-            } else if (type === 'skills') {
-                content = `
-                    <div class="modal-section">
-                        <div class="modal-section-title">Core Skills</div>
-                        <div class="modal-section-content">
-                            <ul>${item.skills.map(s => `<li>${s}</li>`).join('')}</ul>
-                        </div>
-                    </div>
-                `;
-            } else {
-                content = `
-                    <div class="modal-section">
-                        <div class="modal-section-title">Details</div>
-                        <div class="modal-section-content">
-                            <p><strong>GPA:</strong> ${item.gpa}</p>
-                            <p><strong>Period:</strong> ${item.period}</p>
-                            <p style="margin-top: 16px;">${item.details}</p>
-                        </div>
-                    </div>
-                `;
-            }
+function renderProjects() {
+  document.getElementById('projectsGrid').innerHTML = PROJECTS.map((p, i) => `
+    <div class="project-card ${p.badges.includes('featured') ? 'featured' : ''} fade-up"
+         style="animation-delay:${i * 0.07}s"
+         onclick="openModal('${p.id}')">
+      <div class="project-head">
+        <div class="project-title">${p.title}</div>
+        <div class="badges">
+          ${p.badges.includes('live')     ? '<span class="badge badge-live">Live</span>' : ''}
+          ${p.badges.includes('featured') ? '<span class="badge badge-feat">Featured</span>' : ''}
+        </div>
+      </div>
+      <div class="project-desc">${p.desc}</div>
+      <div class="eng-parallel">
+        <div class="ep-label">// engineering parallels</div>
+        <div class="ep-items">${p.parallel.map(x => `<span class="ep-item">${x}</span>`).join('')}</div>
+      </div>
+      <div class="project-foot">
+        <div class="tags">${p.tags.slice(0,5).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        ${p.link ? `<a href="${p.link}" target="_blank" class="project-link" onclick="event.stopPropagation()">${p.linkLabel || '↗ Link'}</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
 
-            document.getElementById('modalContent').innerHTML = content;
-            document.getElementById('modalOverlay').classList.add('active');
-        }
+function renderExperience() {
+  document.getElementById('experienceTimeline').innerHTML = EXPERIENCE.map(e => `
+    <div class="tl-item fade-up">
+      <div class="tl-period">${e.period}</div>
+      <div class="tl-title">${e.title}</div>
+      <div class="tl-company">${e.company}</div>
+      <ul class="tl-list">${e.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+      <div class="tl-tags">${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
 
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
+function renderSkills() {
+  document.getElementById('skillsGrid').innerHTML = SKILLS.map(s => `
+    <div class="skill-group fade-up">
+      <div class="sg-title">${s.group}</div>
+      <div class="sg-items">${s.items.map(i => `<span class="skill-item">${i}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
 
-        let mapInitialized = false;
-        function initMap() {
-            if (mapInitialized) return;
-            mapInitialized = true;
-            
-            const map = L.map('map').setView([37.3541, -121.9552], 12);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-            
-            // Add a general circle to show area instead of exact location
-            const circle = L.circle([37.3541, -121.9552], {
-                color: '#ea580c',
-                fillColor: '#ea580c',
-                fillOpacity: 0.1,
-                weight: 2,
-                radius: 2000 // 2km radius circle
-            }).addTo(map);
-            
-            circle.bindPopup('<b>Santa Clara Area</b><br/>📍 Based in this region').openPopup();
-        }
-        
-        // Wait for portfolioData to load, then initialize
-        function initPortfolio() {
-            if (typeof portfolioData !== 'undefined') {
-                data = portfolioData;
-                renderCards('experience', true);
-                renderCards('projects', false);
-                renderCards('skills', false);
-                renderCards('education', true);
-            } else {
-                console.error('ERROR: portfolio-data.js not loaded! Make sure portfolio-data.js is in the same folder as the HTML file.');
-                // Fallback to empty data
-                data = { experience: [], projects: [], skills: [], education: [] };
-            }
-        }
-        
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initPortfolio);
-        } else {
-            initPortfolio();
-        }
+function renderEducation() {
+  document.getElementById('educationGrid').innerHTML = EDUCATION.map(e => `
+    <div class="edu-card fade-up">
+      <div class="edu-degree">${e.degree}</div>
+      <div class="edu-school">${e.school}</div>
+      <div class="edu-meta">
+        <span>${e.period}</span>
+        ${e.gpa ? `<span>GPA: ${e.gpa}</span>` : ''}
+      </div>
+      <div class="edu-detail">${e.detail}</div>
+    </div>
+  `).join('');
+}
 
-        function renderCards(type, useCompanyLogo = false) {
-            const items = data[type];
-            const grid = document.getElementById(type + 'Grid');
-            grid.innerHTML = items.map(item => `
-                <div class="card" onclick="openModal('${type}', ${item.id})">
-                    ${useCompanyLogo && item.logo ? `<div class="card-company"><img src="${item.logo}" alt="${item.company}"></div>` : `<div class="card-icon">${item.icon}</div>`}
-                    <div class="card-content">
-                        <div class="card-title">${item.title || item.name}</div>
-                        <div class="card-subtitle">${item.company || item.school || ''}</div>
-                        <div class="card-description">${item.dates || item.period || item.shortDesc || ''}</div>
-                        <div class="card-tags">
-                            ${(item.tags || []).slice(0, 2).map(tag => `<span class="card-tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
+// ─────────────────────────────────────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────────────────────────────────────
 
-        // Contact form submission
+function openModal(id) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('mTitle').textContent = p.title;
+  document.getElementById('mSub').textContent   = p.tags.join(' · ');
+  document.getElementById('mBody').innerHTML = `
+    <div class="modal-section">
+      <div class="modal-stitle">Overview</div>
+      <div class="modal-content-text">${p.desc}</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-stitle">Engineering Parallels</div>
+      <div class="modal-content-text">
+        <ul>${p.parallel.map(x => `<li>${x}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-stitle">Technical Details</div>
+      <div class="modal-content-text">
+        <ul>${p.details.map(d => `<li>${d}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-stitle">Stack</div>
+      <div class="modal-tags">${p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}</div>
+    </div>
+    ${p.link ? `<div class="modal-section">
+      <a href="${p.link}" target="_blank" class="btn-primary">${p.linkLabel || '↗ View Project'}</a>
+    </div>` : ''}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
 
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            // e.preventDefault();
-            // const btn = e.target.querySelector('.submit-btn');
-            // const msgDiv = document.getElementById('formMessage');
-            // btn.disabled = true;
-            // btn.textContent = 'Sending...';
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
 
-            // try {
-            //     emailjs.init("gKGXd08RqVD1zWPC7");
-                
-            //     const response = await emailjs.send('service_40vdqqd', 'template_n4c5t1d', {
-            //         to_email: 'mrugakshi77@gmail.com',
-            //         from_name: document.getElementById('name').value,
-            //         from_email: document.getElementById('email').value,
-            //         subject: document.getElementById('subject').value,
-            //         message: document.getElementById('message').value
-            //     });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-            //     if (response.status === 200) {
-            //         msgDiv.className = 'form-message success';
-            //         msgDiv.textContent = '✓ Email sent successfully! I\'ll get back to you soon.';
-            //         e.target.reset();
-            //         btn.textContent = 'Send Message';
-            //         btn.disabled = false;
-            //     }
-            // } catch (error) {
-            //     msgDiv.className = 'form-message error';
-            //     msgDiv.textContent = '✗ Error sending email. Please try again.';
-            //     btn.textContent = 'Send Message';
-            //     btn.disabled = false;
-            
-            // }
+// ─────────────────────────────────────────────────────────────────────────────
+// MAP
+// ─────────────────────────────────────────────────────────────────────────────
 
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            const mailto = `mailto:mrugakshi77@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
-            window.location.href = mailto;
-        });
-    </script>
+let mapInit = false;
+function initMap() {
+  if (mapInit) return;
+  mapInit = true;
+  const map = L.map('map').setView([37.3541, -121.9552], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+  L.circle([37.3541, -121.9552], {
+    color: '#f97316', fillColor: '#f97316',
+    fillOpacity: 0.1, weight: 2, radius: 2000
+  }).addTo(map).bindPopup('<b>Santa Clara, CA</b>').openPopup();
+}
+
+new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { initMap(); }
+}, { threshold: 0.1 }).observe(document.getElementById('contact'));
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTACT FORM
+// ─────────────────────────────────────────────────────────────────────────────
+
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name    = document.getElementById('cName').value;
+  const email   = document.getElementById('cEmail').value;
+  const subject = document.getElementById('cSubject').value;
+  const message = document.getElementById('cMessage').value;
+  window.location.href = `mailto:mrugakshi77@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCROLL SPY
+// ─────────────────────────────────────────────────────────────────────────────
+
+const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
+const sectionIds = ['projects','experience','skills','education','contact'];
+
+window.addEventListener('scroll', () => {
+  let current = sectionIds[0];
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 240) current = id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MOBILE DRAWER
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openDrawer()  { document.getElementById('mobileDrawer').classList.add('open'); }
+function closeDrawer() { document.getElementById('mobileDrawer').classList.remove('open'); }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
+
+renderProjects();
+renderExperience();
+renderSkills();
+renderEducation();
+</script>
 </body>
 </html>
