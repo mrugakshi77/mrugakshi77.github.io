@@ -13,18 +13,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:          #0c0c0e;
-            --surface:     #141416;
-            --surface-2:   #1c1c20;
+            --bg:          ##3a3a4a;
+            --surface:     #252529;
+            --surface-2:   #343434;
             --border:      #272729;
             --border-mid:  #38383e;
-            --text:        #e8e8e8;
-            --text-muted:  #6b6b74;
-            --text-dim:    #33333a;
+            --text:        #ffffff;
+            --text-muted:  #c3c3c3;
+            --text-dim:    #818196;
             --accent:      #f97316;
             --accent-dim:  rgba(249,115,22,0.1);
             --accent-glow: rgba(249,115,22,0.22);
-            --green:       #10b981;
+            --green:       #06ffac;
             --font-display:'Bebas Neue', sans-serif;
             --font-body:   'DM Sans', -apple-system, sans-serif;
             --font-mono:   'DM Mono', monospace;
@@ -216,7 +216,7 @@
         /* ── SECTION BASE ────────────────────────────── */
         .section {
             padding: 96px 0;
-            max-width: 860px;
+            max-width: inherit;
         }
 
         .section + .section {
@@ -249,7 +249,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 80px 0 80px;
-            max-width: 860px;
+            max-width: inherit;
         }
 
         .hero-eyebrow {
@@ -1063,7 +1063,8 @@
                         and systems thinking to process reliably.
                     </p>
                     <p class="hero-bio" style="margin-top:12px;">
-                        - That background translates directly: <strong>batch correction → normalization at scale</strong>; <br>
+                        That background translates directly: <br>
+                        - batch correction → <strong>normalization at scale</strong>; <br>
                         - variant prediction over 22M records → <strong>large-scale feature engineering and low-latency retrieval systems</strong>; <br>
                         - HPC pipeline optimization → <strong>distributed workflow orchestration</strong>. 
                     </p>
