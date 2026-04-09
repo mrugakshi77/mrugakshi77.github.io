@@ -41,7 +41,6 @@
             line-height: 1.6;
         }
 
-        /* dot-grid atmosphere */
         body::before {
             content: '';
             position: fixed;
@@ -52,7 +51,6 @@
             z-index: 0;
         }
 
-        /* ── LAYOUT ──────────────────────────────────── */
         .layout {
             display: flex;
             min-height: 100vh;
@@ -75,7 +73,6 @@
             overflow: hidden;
         }
 
-        /* subtle vertical scan-line texture on sidebar */
         .sidebar::before {
             content: '';
             position: absolute;
@@ -90,11 +87,7 @@
             pointer-events: none;
         }
 
-        .sidebar-brand {
-            margin-bottom: 44px;
-            position: relative;
-        }
-
+        .sidebar-brand { margin-bottom: 44px; position: relative; }
         .sidebar-name {
             font-family: var(--font-display);
             font-size: 1.75em;
@@ -102,7 +95,6 @@
             color: var(--text);
             line-height: 1.05;
         }
-
         .sidebar-role {
             font-family: var(--font-mono);
             font-size: 0.62em;
@@ -143,18 +135,13 @@
             transition: color 0.2s;
         }
 
-        .nav-item:hover {
-            color: var(--text);
-            background: var(--surface-2);
-        }
-
+        .nav-item:hover { color: var(--text); background: var(--surface-2); }
         .nav-item.active {
             color: var(--text);
             background: var(--surface-2);
             border-left-color: var(--accent);
             padding-left: 9px;
         }
-
         .nav-item.active .nav-num { color: var(--accent); }
 
         .sidebar-footer {
@@ -170,20 +157,10 @@
             letter-spacing: 0.3px;
         }
 
-        .sidebar-contact-line a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
+        .sidebar-contact-line a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
         .sidebar-contact-line a:hover { color: var(--accent); }
 
-        .sidebar-socials {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-top: 4px;
-        }
+        .sidebar-socials { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 
         .social-link {
             display: inline-flex;
@@ -199,11 +176,7 @@
             letter-spacing: 0.3px;
             transition: all 0.2s;
         }
-
-        .social-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .social-link:hover { border-color: var(--accent); color: var(--accent); }
 
         /* ── MAIN ─────────────────────────────────────── */
         .main {
@@ -213,15 +186,12 @@
             max-width: calc(100% - var(--sidebar-w));
         }
 
-        /* ── SECTION BASE ────────────────────────────── */
         .section {
             padding: 96px 0;
             max-width: inherit;
         }
 
-        .section + .section {
-            border-top: 1px solid var(--border);
-        }
+        .section + .section { border-top: 1px solid var(--border); }
 
         .section-label {
             font-family: var(--font-mono);
@@ -248,7 +218,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 0 80px;
+            padding: 80px 0;
             max-width: inherit;
         }
 
@@ -281,10 +251,7 @@
             margin-bottom: 36px;
         }
 
-        .hero-headline .hl-accent {
-            color: var(--accent);
-            display: block;
-        }
+        .hero-headline .hl-accent { color: var(--accent); display: block; }
 
         .hero-body {
             display: grid;
@@ -293,31 +260,13 @@
             align-items: start;
         }
 
-        .hero-bio {
-            font-size: 0.96em;
-            color: var(--text-muted);
-            line-height: 1.85;
-        }
-
+        .hero-bio { font-size: 0.96em; color: var(--text-muted); line-height: 1.85; }
         .hero-bio + .hero-bio { margin-top: 12px; }
+        .hero-bio strong { color: var(--text); font-weight: 500; }
 
-        .hero-bio strong {
-            color: var(--text);
-            font-weight: 500;
-        }
+        .hero-stats { display: flex; gap: 28px; margin: 36px 0; flex-wrap: wrap; }
 
-        .hero-stats {
-            display: flex;
-            gap: 28px;
-            margin: 36px 0;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            border-left: 2px solid var(--accent);
-            padding-left: 14px;
-        }
-
+        .stat { border-left: 2px solid var(--accent); padding-left: 14px; }
         .stat-value {
             font-family: var(--font-display);
             font-size: 2em;
@@ -325,7 +274,6 @@
             color: var(--text);
             line-height: 1;
         }
-
         .stat-label {
             font-family: var(--font-mono);
             font-size: 0.6em;
@@ -335,11 +283,7 @@
             margin-top: 3px;
         }
 
-        .hero-cta {
-            display: flex;
-            gap: 10px;
-            margin-top: 8px;
-        }
+        .hero-cta { display: flex; gap: 10px; margin-top: 8px; }
 
         .hero-photo img {
             width: 100%;
@@ -350,7 +294,6 @@
             filter: grayscale(15%) brightness(0.92);
             transition: filter 0.3s;
         }
-
         .hero-photo img:hover { filter: grayscale(0%) brightness(1); }
 
         /* ── BUTTONS ─────────────────────────────────── */
@@ -369,7 +312,6 @@
             transition: all 0.2s;
             letter-spacing: 0.2px;
         }
-
         .btn-primary:hover {
             background: #ea6c0a;
             transform: translateY(-1px);
@@ -390,23 +332,16 @@
             display: inline-block;
             transition: all 0.2s;
         }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
         /* ── PROJECTS ────────────────────────────────── */
-        .projects-grid {
-            display: grid;
-            gap: 16px;
-        }
+        .projects-grid { display: grid; gap: 16px; }
 
         .project-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 26px 30px;
+            padding: 22px 26px;
             cursor: pointer;
             transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
             position: relative;
@@ -441,7 +376,7 @@
             align-items: flex-start;
             justify-content: space-between;
             gap: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .project-title {
@@ -452,11 +387,7 @@
             line-height: 1.4;
         }
 
-        .badges {
-            display: flex;
-            gap: 5px;
-            flex-shrink: 0;
-        }
+        .badges { display: flex; gap: 5px; flex-shrink: 0; }
 
         .badge {
             font-family: var(--font-mono);
@@ -471,20 +402,33 @@
         .badge-live   { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
         .badge-feat   { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(249,115,22,0.2); }
 
+        /* ── CARD BODY: content + image panel ─────────── */
+        .project-card-body {
+            display: grid;
+            grid-template-columns: 1fr 210px;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .project-card-body.no-images {
+            grid-template-columns: 1fr;
+        }
+
+        .project-content { display: flex; flex-direction: column; gap: 0; }
+
         .project-desc {
             font-size: 0.86em;
             color: var(--text-muted);
             line-height: 1.75;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
-        /* Engineering Parallels block */
         .eng-parallel {
             background: rgba(249,115,22,0.04);
             border: 1px solid rgba(249,115,22,0.14);
             border-radius: var(--r);
             padding: 10px 14px;
-            margin: 14px 0;
+            margin-bottom: 12px;
         }
 
         .ep-label {
@@ -496,28 +440,19 @@
             margin-bottom: 6px;
         }
 
-        .ep-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 14px;
-        }
+        .ep-items { display: flex; flex-wrap: wrap; gap: 6px 14px; }
 
         .ep-item {
             font-family: var(--font-mono);
             font-size: 0.71em;
             color: var(--text-muted);
         }
-
-        .ep-item::before {
-            content: '→ ';
-            color: var(--accent);
-        }
+        .ep-item::before { content: '→ '; color: var(--accent); }
 
         .project-foot {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 14px;
             gap: 12px;
         }
 
@@ -544,14 +479,55 @@
             flex-shrink: 0;
             transition: opacity 0.2s;
         }
-
         .project-link:hover { opacity: 0.75; text-decoration: underline; }
 
-        /* ── EXPERIENCE ──────────────────────────────── */
-        .timeline {
-            position: relative;
-            padding-left: 22px;
+        /* ── IMAGE PANEL ──────────────────────────────── */
+        .project-img-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-shrink: 0;
         }
+
+        .project-img-main {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-radius: var(--r);
+            border: 1px solid var(--border);
+            cursor: zoom-in;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            display: block;
+            background: var(--surface-2);
+        }
+
+        .project-img-main:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        .project-img-thumbs {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .project-img-thumb {
+            width: 38px;
+            height: 26px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            opacity: 0.45;
+            transition: opacity 0.15s, border-color 0.15s;
+            background: var(--surface-2);
+        }
+        .project-img-thumb:hover { opacity: 0.8; }
+        .project-img-thumb.active { opacity: 1; border-color: var(--accent); }
+
+        /* ── EXPERIENCE ──────────────────────────────── */
+        .timeline { position: relative; padding-left: 22px; }
 
         .timeline::before {
             content: '';
@@ -561,10 +537,7 @@
             background: var(--border);
         }
 
-        .tl-item {
-            position: relative;
-            margin-bottom: 52px;
-        }
+        .tl-item { position: relative; margin-bottom: 52px; }
 
         .tl-item::before {
             content: '';
@@ -584,24 +557,10 @@
             margin-bottom: 5px;
         }
 
-        .tl-title {
-            font-size: 1.04em;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 2px;
-        }
+        .tl-title { font-size: 1.04em; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .tl-company { font-size: 0.84em; color: var(--accent); font-weight: 500; margin-bottom: 14px; }
 
-        .tl-company {
-            font-size: 0.84em;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 14px;
-        }
-
-        .tl-list {
-            list-style: none;
-            padding: 0;
-        }
+        .tl-list { list-style: none; padding: 0; }
 
         .tl-list li {
             font-size: 0.875em;
@@ -611,13 +570,7 @@
             position: relative;
             margin-bottom: 7px;
         }
-
-        .tl-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
+        .tl-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
         .tl-tags { margin-top: 14px; display: flex; gap: 5px; flex-wrap: wrap; }
 
@@ -670,19 +623,8 @@
             padding: 26px 28px;
         }
 
-        .edu-degree {
-            font-size: 1.04em;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 3px;
-        }
-
-        .edu-school {
-            font-size: 0.84em;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
+        .edu-degree { font-size: 1.04em; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+        .edu-school { font-size: 0.84em; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
 
         .edu-meta {
             font-family: var(--font-mono);
@@ -693,11 +635,7 @@
             gap: 16px;
         }
 
-        .edu-detail {
-            font-size: 0.86em;
-            color: var(--text-muted);
-            line-height: 1.75;
-        }
+        .edu-detail { font-size: 0.86em; color: var(--text-muted); line-height: 1.75; }
 
         /* ── CONTACT ─────────────────────────────────── */
         .contact-grid {
@@ -764,7 +702,6 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-
         .submit-btn:hover { background: #ea6c0a; }
 
         #map {
@@ -793,9 +730,9 @@
             background: var(--surface);
             border: 1px solid var(--border-mid);
             border-radius: 12px;
-            max-width: 680px;
+            max-width: 760px;
             width: 100%;
-            max-height: 88vh;
+            max-height: 90vh;
             overflow-y: auto;
             animation: modal-in 0.22s ease;
         }
@@ -818,19 +755,8 @@
             z-index: 1;
         }
 
-        .modal-head h2 {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.2px;
-        }
-
-        .modal-head p {
-            font-family: var(--font-mono);
-            font-size: 0.65em;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
+        .modal-head h2 { font-size: 1.3em; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+        .modal-head p { font-family: var(--font-mono); font-size: 0.65em; color: var(--text-muted); margin-top: 4px; }
 
         .modal-close {
             background: transparent;
@@ -846,12 +772,11 @@
             flex-shrink: 0;
             transition: all 0.2s;
         }
-
         .modal-close:hover { border-color: var(--accent); color: var(--accent); }
 
         .modal-body { padding: 26px 30px; }
 
-        .modal-section { margin-bottom: 22px; }
+        .modal-section { margin-bottom: 24px; }
 
         .modal-stitle {
             font-family: var(--font-mono);
@@ -859,23 +784,12 @@
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .modal-content-text {
-            font-size: 0.9em;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
+        .modal-content-text { font-size: 0.9em; color: var(--text-muted); line-height: 1.8; }
         .modal-content-text ul { list-style: none; padding: 0; }
-
-        .modal-content-text li {
-            padding-left: 18px;
-            position: relative;
-            margin-bottom: 8px;
-        }
-
+        .modal-content-text li { padding-left: 18px; position: relative; margin-bottom: 8px; }
         .modal-content-text li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
         .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -890,6 +804,71 @@
             color: var(--text-muted);
         }
 
+        /* ── MODAL IMAGE GALLERY ─────────────────────── */
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+        }
+
+        .modal-gallery-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-radius: var(--r);
+            border: 1px solid var(--border);
+            cursor: zoom-in;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            background: var(--surface-2);
+        }
+
+        .modal-gallery-img:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        /* ── LIGHTBOX ────────────────────────────────── */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.open { display: flex; }
+
+        .lightbox-overlay img {
+            max-width: 92vw;
+            max-height: 92vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            animation: modal-in 0.18s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 24px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            width: 36px; height: 36px;
+            border-radius: var(--r);
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .lightbox-close:hover { background: var(--accent); border-color: var(--accent); }
+
         /* ── MOBILE HEADER ───────────────────────────── */
         .mobile-header {
             display: none;
@@ -902,11 +881,7 @@
             justify-content: space-between;
         }
 
-        .mobile-name {
-            font-family: var(--font-display);
-            font-size: 1.15em;
-            letter-spacing: 2.5px;
-        }
+        .mobile-name { font-family: var(--font-display); font-size: 1.15em; letter-spacing: 2.5px; }
 
         .hamburger {
             background: transparent;
@@ -919,14 +894,7 @@
             font-family: var(--font-mono);
         }
 
-        .mobile-drawer {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 200;
-        }
-
+        .mobile-drawer { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; }
         .mobile-drawer.open { display: flex; }
 
         .mobile-drawer-inner {
@@ -970,8 +938,8 @@
         .fade-up:nth-child(4) { animation-delay: 0.21s; }
         .fade-up:nth-child(5) { animation-delay: 0.28s; }
         .fade-up:nth-child(6) { animation-delay: 0.35s; }
+        .fade-up:nth-child(7) { animation-delay: 0.42s; }
 
-        /* ── SCROLLBAR ───────────────────────────────── */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
@@ -986,6 +954,9 @@
             .hero-photo { display: none; }
             .contact-grid { grid-template-columns: 1fr; }
             #map { height: 280px; }
+            .project-card-body { grid-template-columns: 1fr !important; }
+            .project-img-panel { order: -1; }
+            .project-img-main { aspect-ratio: 16 / 8; }
         }
 
         @media (max-width: 580px) {
@@ -993,6 +964,7 @@
             .hero-stats { gap: 18px; }
             .skills-grid { grid-template-columns: 1fr 1fr; }
             .section { padding: 72px 0; }
+            .modal-gallery { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -1046,7 +1018,7 @@
 
         <!-- HERO -->
         <section id="hero" class="section">
-            <div class="hero-eyebrow">Looking to join a team where I can build scalable software, data pipelines, 
+            <div class="hero-eyebrow">Looking to join a team where I can build scalable software, data pipelines,
                 and ML-driven systems that turn complex data into actionable insights!</div>
             <h1 class="hero-headline">
                 Software Engineer<br>
@@ -1057,16 +1029,16 @@
                 <div>
                     <p class="hero-bio">
                         I build <strong>production-grade data pipelines</strong>, ML-backed web applications,
-                        and scalable backend systems. My engineering experience comes from working with some 
-                        of the most complex data in existence — <strong>high-dimensional</strong> genomic datasets with <strong>millions of features, 
-                        terabyte-scale sequencing outputs, and multi-modal data</strong> that demands both statistical rigor 
+                        and scalable backend systems. My engineering experience comes from working with some
+                        of the most complex data in existence — <strong>high-dimensional</strong> genomic datasets with <strong>millions of features,
+                        terabyte-scale sequencing outputs, and multi-modal data</strong> that demands both statistical rigor
                         and systems thinking to process reliably.
                     </p>
                     <p class="hero-bio" style="margin-top:12px;">
                         That background translates directly: <br>
                         - batch correction → <strong>normalization at scale</strong>; <br>
                         - variant prediction over 22M records → <strong>large-scale feature engineering and low-latency retrieval systems</strong>; <br>
-                        - HPC pipeline optimization → <strong>distributed workflow orchestration</strong>. 
+                        - HPC pipeline optimization → <strong>distributed workflow orchestration</strong>.
                     </p>
                     <div class="hero-stats">
                         <div class="stat">
@@ -1173,6 +1145,12 @@
     </div>
 </div>
 
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target.id==='lightboxOverlay'||event.target.tagName==='IMG')closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="Full screenshot">
+</div>
+
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA
@@ -1187,6 +1165,9 @@ const PROJECTS = [
     parallel: ['async fan-out + semaphore', 'two-layer caching strategy', 'weighted risk scoring engine', 'REST API + Typer CLI', 'CI/CD pipeline gate'],
     tags: ['Python','FastAPI','PostgreSQL','SQLAlchemy','Docker','Async','Typer CLI'],
     link: 'https://depradar.onrender.com', linkLabel: '↗ Live Demo',
+    screenshots: [
+      'project_screenshots/depradar.jfif'
+    ],
     details: [
       'Bounded async fan-out via asyncio.gather + Semaphore(10) — scan time scales with slowest single package, not the sum of all',
       'Two-layer caching: PackageCache per PyPI package (TTL 12h) + ScanPackage denormalisation for O(1) report retrieval with a single DB query',
@@ -1204,6 +1185,10 @@ const PROJECTS = [
     parallel: ['large-scale feature store (22M+ records)', 'custom HDF5 indexing for fast retrieval', 'batch query API design', 'ML interpretability (DeepSHAP)', 'full-stack end-to-end deployment'],
     tags: ['Python','Flask','JavaScript','HDF5','ChromBPNet','SHAP','Vue.js'],
     link: 'https://vep.corces.gladstone.org/', linkLabel: '↗ Live App',
+    screenshots: [
+      'project_screenshots/VEP_1.jfif',
+      'project_screenshots/VEP_2.jfif'
+    ],
     details: [
       'Custom HDF5 retrieval layer delivers sub-second query performance on a 22M+ record dataset — too large for conventional relational storage',
       'Batch querying API: simultaneous multi-variant processing dramatically reduces round-trips for power users',
@@ -1220,6 +1205,11 @@ const PROJECTS = [
     parallel: ['sparse matrix optimization (4 GB → 200 MB)', 'interactive data dashboard w/ real-time filtering', 'statistical hypothesis testing at scale', 'free-tier cloud deployment of a data-heavy app', 'reproducible analysis pipeline (990 DEGs)'],
     tags: ['R','Seurat','R Shiny','ggplot2','sparse matrix','GEOquery','DESeq2'],
     link: 'https://mrugakshi77.shinyapps.io/pss-biomarker-explorer', linkLabel: '↗ Live App',
+    screenshots: [
+      'project_screenshots/pss_1.jfif',
+      'project_screenshots/pss_2.jfif',
+      'project_screenshots/pss_3.jfif'
+    ],
     details: [
       '58,000 cells × 2,000 HVGs stored as a sparse dgCMatrix — memory footprint reduced from ~4 GB to under 200 MB, enabling deployment on free-tier shinyapps.io',
       'Full QC pipeline: feature filtering, mitochondrial % cutoffs, LogNormalize, PCA (30 PCs) → UMAP → Louvain clustering (27 clusters)',
@@ -1236,6 +1226,12 @@ const PROJECTS = [
     parallel: ['high-dimensional classification (1000s of features)', 'multi-class deep learning pipeline', 'rigorous train/val/test evaluation', 'feature selection at scale'],
     tags: ['Python','PyTorch','scikit-learn','pandas','numpy','TCGA'],
     link: null,
+    screenshots: [
+      'project_screenshots/TCGA_1.jfif',
+      'project_screenshots/TCGA_2.jfif',
+      'project_screenshots/TCGS_3.jfif',
+      'project_screenshots/TCGA_4.jfif'
+    ],
     details: [
       '99.38% test accuracy on multi-class cancer type classification from RNA-seq gene expression profiles',
       'Input space spans thousands of gene features — requires principled feature selection and dimensionality management',
@@ -1244,19 +1240,48 @@ const PROJECTS = [
     ]
   },
   {
-    id: 'pipeline',
-    title: 'Multi-Omics Processing Pipeline',
+    id: 'choir',
+    title: 'OPC Subtype Discovery via CHOIR — Hypothalamus scRNA-seq',
     badges: [],
-    desc: 'Production Snakemake pipeline integrating gene expression and chromatin accessibility data from paired single-cell sequencing experiments representing ~3 million cells. Engineered for HPC with a 40% compute reduction through parallelization, Demuxlet-based sample deconvolution, automated QC checkpoints, and modular rule-based task orchestration.',
-    parallel: ['multi-modal ETL pipeline design', 'HPC workflow orchestration (Snakemake)', '40% compute optimization via parallelization', 'automated QC + data quality gates', 'modular pipeline — steps add/remove without full reruns'],
-    tags: ['Python','R','Snakemake','HPC','Slurm','Conda','Jupyter'],
-    link: null,
+    desc: 'Re-analyzed Chen et al. (2017) mouse hypothalamus scRNA-seq data (45 cell types) using CHOIR (Cluster Hierarchy Optimization by Iterative Random Forests). Identified 47 clusters vs. the original 45. Focused deep-dive on oligodendrocyte precursor cells (OPCs): CHOIR split the original OPC cluster into two statistically and biologically distinct subtypes — Cluster 4 (reactive/progenitor OPCs) and Cluster 7 (mature OPCs) — validated with GO enrichment, AddModuleScore, and Wilcoxon rank-sum tests (p < 2.2e-16).',
+    parallel: ['hierarchical clustering optimization (CHOIR)', 'GO enrichment analysis at scale', 'module scoring (AddModuleScore)', 'Wilcoxon hypothesis testing for subtype validation', 'UMAP dimensionality reduction + visualization'],
+    tags: ['R','Seurat','CHOIR','ggplot2','GO Enrichment','Wilcoxon','UMAP','scRNA-seq'],
+    link: 'https://lnkd.in/gEU4_CCx', linkLabel: '↗ GitHub',
+    screenshots: [
+      'project_screenshots/choir_1.jfif',
+      'project_screenshots/choir_2.jfif',
+      'project_screenshots/choir_3.jfif',
+      'project_screenshots/choir_4.jfif',
+      'project_screenshots/choir_5.jfif'
+    ],
     details: [
-      'Integrates two data modalities per sample (RNA expression + chromatin accessibility) — equivalent to a multi-source ETL with cross-modal validation gates',
-      'Demuxlet integration for cell-level sample deconvolution and doublet detection — equivalent to deduplication and data quality enforcement in data pipelines',
-      'Intelligent parallelization across samples and modalities reduced HPC compute time by 40%',
-      'Modular Snakemake rules: any stage can be modified and rerun without invalidating upstream steps — similar to idempotent task design in Airflow/Prefect',
-      'Automated QC summary visualizations at each checkpoint for monitoring pipeline health'
+      'CHOIR identified 47 clusters from the Chen et al. hypothalamus dataset, closely matching the original 45 ground-truth clusters — strong validation of the algorithm\'s resolution',
+      'Cluster 4 GO signature: RNA splicing, gliogenesis, glial cell differentiation → reactive/progenitor OPC identity',
+      'Cluster 7 GO signature: cytoplasmic translation, gliogenesis, synapse-related terms → mature OPC identity',
+      'AddModuleScore (Seurat) quantified marker gene expression at single-cell resolution; density + boxplots confirmed score distributions differ between subtypes',
+      'Wilcoxon rank-sum test validated statistical significance of the split (p < 2.2e-16), confirming biological meaningfulness rather than clustering artifacts',
+      'Potential follow-up directions: trajectory analysis, spatial transcriptomics co-localization, functional validation in myelination/repair contexts'
+    ]
+  },
+  {
+    id: 'yeast',
+    title: 'Yeast scRNA-seq — Replicating Stress-Driven Transcriptional Heterogeneity',
+    badges: [],
+    desc: 'Built a custom end-to-end R pipeline for plate-based (SMART-seq) single-cell RNA-seq analysis of 163 S. cerevisiae cells under salt stress vs. no-stress conditions, replicating Gasch et al. (2017, PMID: 29239744). Successfully reproduced Figure 1 of the original study — RP, RiBi, and iESR gene module score variation — via FASTQ download → alignment → count matrix → Seurat, PCA/UMAP clustering, GO enrichment, and DESeq2 differential expression.',
+    parallel: ['custom end-to-end SMART-seq pipeline', 'SRA download → alignment → count matrix → Seurat', 'module scoring to quantify gene program activity', 'GO enrichment + DESeq2 differential expression', 'figure replication as analytical validation'],
+    tags: ['R','Seurat','Rsubread','featureCounts','DESeq2','SMART-seq','GO Enrichment','UMAP'],
+    link: 'https://lnkd.in/g-dSvudf', linkLabel: '↗ GitHub',
+    screenshots: [
+      'project_screenshots/yeast_1.png',
+      'project_screenshots/yeast_2.jfif',
+      'project_screenshots/yeast_3.jfif'
+    ],
+    details: [
+      'Custom pipeline: SRA ID fetch → FASTQ download → Rsubread alignment to S. cerevisiae reference → featureCounts quantification → Seurat object construction for 163 cells',
+      'Replicated Figure 1 from Gasch et al. (2017): gene module score variation (RP, RiBi, iESR clusters) across single yeast cells under stress/no-stress — confirming dynamic regulatory heterogeneity',
+      'PCA and UMAP clustering clearly separated stressed vs. unstressed cells, confirming condition-driven transcriptomic structure',
+      'GO enrichment identified canonical stress response pathways (salt stress, oxidative stress, protein folding) enriched in high-iESR cells, consistent with the original study',
+      'Demonstrated that SMART-seq plate-based data requires distinct handling from droplet-based scRNA-seq — different read structure, alignment strategy, and expression modeling'
     ]
   },
   {
@@ -1267,6 +1292,10 @@ const PROJECTS = [
     parallel: ['clinical data processing pipeline', 'multi-step variant detection workflow', 'automated QC + visualization at scale', 'reproducible environment management (pixi)', 'concordance validation against ground truth'],
     tags: ['Python','minimap2','samtools','bcftools','Longshot','pixi','Jupyter'],
     link: 'https://github.com/mrugakshi77/pacbio-hifi-sars2-variant-calling', linkLabel: '↗ GitHub',
+    screenshots: [
+      'project_screenshots/pac_1.jfif',
+      'project_screenshots/pac_2.jfif'
+    ],
     details: [
       '129,915 PacBio HiFi reads aligned to SARS-CoV-2 reference (NC_045512.2) using minimap2 asm20 preset, achieving 2902x genome coverage',
       'Longshot variant caller designed for long-read HiFi data on haploid genomes — SNP calling with phasing support',
@@ -1300,9 +1329,9 @@ const EXPERIENCE = [
       'Built risk-analysis and resource-scheduling models to quantify audit-system risk and optimize audit planning',
       'Built statistical fine-mapping workflows (SuSiE, Bayesian colocalization) to identify causal signals from GWAS summary statistics, uncovering two independent signals at the HAL locus',
       'Developed integrative data pipeline to identify 16 colocalized protein-metabolite QTL pairs using LD-aware approaches; validated computational outputs against experimental datasets and domain expert review',
-      'Benchmarked statistical models (SuSiE vs SuSiE-inf) on metabolite datasets and documented parameter recommendations for reproducible summary-statistics-based workflows'  
+      'Benchmarked statistical models (SuSiE vs SuSiE-inf) on metabolite datasets and documented parameter recommendations for reproducible summary-statistics-based workflows'
     ],
-    tags: ['Python','R','Statistical Modeling','Pipeline Development', 'Data Science', 'Machine-Learning', 'NLP']
+    tags: ['Python','R','Statistical Modeling','Pipeline Development','Data Science','Machine-Learning','NLP']
   },
   {
     title: 'Research Assistant',
@@ -1312,7 +1341,7 @@ const EXPERIENCE = [
       'Built a python pipeline to explore genome-scale metabolic models using CarveMe on Linux/HPC environments for the m-CAFEs project, enabling accurate microbiome growth analysis across culture mediums',
       'Designed and deployed a full-stack web application backed by a scalable SQL database to automate genome and media file management, streamlining data exploration workflows for wet lab researchers'
     ],
-    tags: ['Python','R','Jupyter','SQL', 'Web-app']
+    tags: ['Python','R','Jupyter','SQL','Web-app']
   },
   {
     title: 'Associate Software Developer',
@@ -1322,7 +1351,7 @@ const EXPERIENCE = [
       'Developed interactive UI components and BI features for the cloud-based Plexos Cloud platform, improving analytics workflows and delivering client-facing data visualizations',
       'Implemented and customized Sisense BI dashboards to deliver client-specific analytics and data visualization solutions'
     ],
-    tags: ['Python','Vue.js','BI Dashboards','Azure', 'Databricks', 'HTML/CSS']
+    tags: ['Python','Vue.js','BI Dashboards','Azure','Databricks','HTML/CSS']
   }
 ];
 
@@ -1357,9 +1386,29 @@ const EDUCATION = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 function renderProjects() {
-  document.getElementById('projectsGrid').innerHTML = PROJECTS.map((p, i) => `
+  document.getElementById('projectsGrid').innerHTML = PROJECTS.map((p, i) => {
+    const hasImgs = p.screenshots && p.screenshots.length > 0;
+    const imgPanel = hasImgs ? `
+      <div class="project-img-panel" onclick="event.stopPropagation()">
+        <img class="project-img-main"
+             src="${p.screenshots[0]}"
+             alt="${p.title} screenshot"
+             onclick="openLightbox('${p.screenshots[0]}')">
+        ${p.screenshots.length > 1 ? `
+        <div class="project-img-thumbs">
+          ${p.screenshots.map((s, idx) => `
+            <img class="project-img-thumb ${idx === 0 ? 'active' : ''}"
+                 src="${s}"
+                 alt="screenshot ${idx + 1}"
+                 onclick="switchImg('${p.id}', ${idx})">
+          `).join('')}
+        </div>` : ''}
+      </div>` : '';
+
+    return `
     <div class="project-card ${p.badges.includes('featured') ? 'featured' : ''} fade-up"
          style="animation-delay:${i * 0.07}s"
+         data-id="${p.id}"
          onclick="openModal('${p.id}')">
       <div class="project-head">
         <div class="project-title">${p.title}</div>
@@ -1368,17 +1417,23 @@ function renderProjects() {
           ${p.badges.includes('featured') ? '<span class="badge badge-feat">Featured</span>' : ''}
         </div>
       </div>
-      <div class="project-desc">${p.desc}</div>
-      <div class="eng-parallel">
-        <div class="ep-label">// engineering parallels</div>
-        <div class="ep-items">${p.parallel.map(x => `<span class="ep-item">${x}</span>`).join('')}</div>
-      </div>
-      <div class="project-foot">
-        <div class="tags">${p.tags.slice(0,5).map(t => `<span class="tag">${t}</span>`).join('')}</div>
-        ${p.link ? `<a href="${p.link}" target="_blank" class="project-link" onclick="event.stopPropagation()">${p.linkLabel || '↗ Link'}</a>` : ''}
+      <div class="project-card-body ${hasImgs ? '' : 'no-images'}">
+        <div class="project-content">
+          <div class="project-desc">${p.desc}</div>
+          <div class="eng-parallel">
+            <div class="ep-label">// engineering parallels</div>
+            <div class="ep-items">${p.parallel.map(x => `<span class="ep-item">${x}</span>`).join('')}</div>
+          </div>
+          <div class="project-foot">
+            <div class="tags">${p.tags.slice(0,5).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            ${p.link ? `<a href="${p.link}" target="_blank" class="project-link" onclick="event.stopPropagation()">${p.linkLabel || '↗ Link'}</a>` : ''}
+          </div>
+        </div>
+        ${imgPanel}
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function renderExperience() {
@@ -1417,15 +1472,58 @@ function renderEducation() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// IMAGE SWITCHING (card thumbnails)
+// ─────────────────────────────────────────────────────────────────────────────
+
+function switchImg(cardId, idx) {
+  const card = document.querySelector(`[data-id="${cardId}"]`);
+  const p = PROJECTS.find(x => x.id === cardId);
+  if (!card || !p) return;
+  card.querySelector('.project-img-main').src = p.screenshots[idx];
+  card.querySelectorAll('.project-img-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LIGHTBOX
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxOverlay').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('open');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // MODAL
 // ─────────────────────────────────────────────────────────────────────────────
 
 function openModal(id) {
   const p = PROJECTS.find(x => x.id === id);
   if (!p) return;
+
   document.getElementById('mTitle').textContent = p.title;
   document.getElementById('mSub').textContent   = p.tags.join(' · ');
+
+  const galleryHtml = p.screenshots && p.screenshots.length > 0 ? `
+    <div class="modal-section">
+      <div class="modal-stitle">Screenshots</div>
+      <div class="modal-gallery">
+        ${p.screenshots.map(s => `
+          <img class="modal-gallery-img"
+               src="${s}"
+               alt="screenshot"
+               onclick="event.stopPropagation(); openLightbox('${s}')">
+        `).join('')}
+      </div>
+    </div>` : '';
+
   document.getElementById('mBody').innerHTML = `
+    ${galleryHtml}
     <div class="modal-section">
       <div class="modal-stitle">Overview</div>
       <div class="modal-content-text">${p.desc}</div>
@@ -1457,7 +1555,15 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightboxOverlay').classList.contains('open')) {
+      closeLightbox();
+    } else {
+      closeModal();
+    }
+  }
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAP
@@ -1478,7 +1584,7 @@ function initMap() {
 }
 
 new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) { initMap(); }
+  if (entries[0].isIntersecting) initMap();
 }, { threshold: 0.1 }).observe(document.getElementById('contact'));
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1498,7 +1604,7 @@ document.getElementById('contactForm').addEventListener('submit', e => {
 // SCROLL SPY
 // ─────────────────────────────────────────────────────────────────────────────
 
-const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
+const navLinks  = document.querySelectorAll('.nav-item[href^="#"]');
 const sectionIds = ['projects','experience','skills','education','contact'];
 
 window.addEventListener('scroll', () => {
